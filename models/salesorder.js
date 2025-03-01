@@ -4,38 +4,23 @@ const {
 } = require('sequelize');
 module.exports = (sequelize, DataTypes) => {
   class SalesOrder extends Model {
-    /**
-     * Helper method for defining associations.
-     * This method is not a part of Sequelize lifecycle.
-     * The `models/index` file will call this method automatically.
-     */
     static associate(models) {
-      // define association here
+      SalesOrder.hasOne(models.SoBillingDetails,{foreignKey:"salesOrderId",as:"billingDetail",onDelete:"CASCADE",onUpdate:"CASCADE"});
     }
   }
   SalesOrder.init({
     soId:DataTypes.STRING,
-
-    customerId: DataTypes.INTEGER,
-
     orderDate: DataTypes.DATE,
 
     quoteId: DataTypes.INTEGER,
+
+    customerId: DataTypes.INTEGER,
 
     customerPoNumber: DataTypes.STRING,
     customerPoDate: DataTypes.DATE,
     salesPerson: DataTypes.STRING,
     territory: DataTypes.STRING,
     remarks:DataTypes.TEXT,
-    
-    currency:DataTypes.STRING,
-    priceList:DataTypes.STRING,
-    paymentTerms:DataTypes.STRING,
-    creditPeriod:DataTypes.INTEGER,
-    frieghtName:DataTypes.STRING,
-    defaultTax:DataTypes.JSON,
-    billingContact:DataTypes.STRING,
-    billingAddress:DataTypes.STRING,
 
     deliveryPolicy:DataTypes.STRING,//Like After Order,After Payement
     deliveryDate:DataTypes.DATE,
@@ -51,6 +36,7 @@ module.exports = (sequelize, DataTypes) => {
     roundOffValue:DataTypes.FLOAT,
     finalAmountDollar:DataTypes.FLOAT,
     finalAmountInr:DataTypes.FLOAT,
+
     termsAndConditions:DataTypes.STRING
   }, {
     sequelize,

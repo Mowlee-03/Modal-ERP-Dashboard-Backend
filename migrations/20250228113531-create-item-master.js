@@ -10,118 +10,69 @@ module.exports = {
         type: Sequelize.INTEGER
       },
       name: {
-        type: Sequelize.STRING
+        type: Sequelize.STRING,
+        allowNull:false,
+        unique:true
       },
       description: {
-        type: Sequelize.TEXT
+        type: Sequelize.TEXT,
+        allowNull:false
       },
       itemType: {
-        type: Sequelize.STRING
+        type: Sequelize.STRING,
+        allowNull:false
       },
-      product: {
-        type: Sequelize.STRING
+      categoryId: {
+        type: Sequelize.INTEGER,
+        allowNull:true,//doubt
+        references:{
+          model:"ItemCategories",
+          key:"id"
+        },
+        onDelete:"SET NULL",
+        onUpdate:"CASCADE"
       },
-      category: {
-        type: Sequelize.STRING
-      },
-      group: {
-        type: Sequelize.STRING
+      groupId: {
+        type: Sequelize.INTEGER,
+        allowNull:true,//doubt
+        references:{
+          model:"ItemGroups",
+          key:"id"
+        },
+        onUpdate:"CASCADE",
+        onDelete:"SET NULL"
       },
       baseUOM: {
-        type: Sequelize.STRING
+        type: Sequelize.STRING,
+        allowNull:false
       },
       barCode: {
-        type: Sequelize.STRING
+        type: Sequelize.STRING,
+        allowNull:true
       },
       partCode: {
-        type: Sequelize.STRING
+        type: Sequelize.STRING,
+        allowNull:true
       },
       warranty: {
-        type: Sequelize.INTEGER
+        type: Sequelize.INTEGER,
+        allowNull:true
       },
       componentLocation: {
-        type: Sequelize.STRING
-      },
-      trackStock: {
-        type: Sequelize.BOOLEAN
-      },
-      salesItem: {
-        type: Sequelize.BOOLEAN
-      },
-      purchaseItem: {
-        type: Sequelize.BOOLEAN
-      },
-      productionItem: {
-        type: Sequelize.BOOLEAN
-      },
-      enableSerialNumber: {
-        type: Sequelize.BOOLEAN
-      },
-      enableBatch: {
-        type: Sequelize.BOOLEAN
-      },
-      enableSalesKit: {
-        type: Sequelize.BOOLEAN
-      },
-      useBillingUOM: {
-        type: Sequelize.BOOLEAN
-      },
-      allowBackOrder: {
-        type: Sequelize.BOOLEAN
-      },
-      recommendedSellingPrice: {
-        type: Sequelize.FLOAT
-      },
-      minimumSellingPrice: {
-        type: Sequelize.FLOAT
-      },
-      salesUOM: {
-        type: Sequelize.STRING
-      },
-      defaultPurchaseCost: {
-        type: Sequelize.FLOAT
-      },
-      landingCostMultiple: {
-        type: Sequelize.FLOAT
-      },
-      purchaseUOM: {
-        type: Sequelize.STRING
-      },
-      safetyStock: {
-        type: Sequelize.FLOAT
-      },
-      reorderQty: {
-        type: Sequelize.FLOAT
-      },
-      leadTime: {
-        type: Sequelize.INTEGER
-      },
-      defaultSupplier: {
-        type: Sequelize.STRING
+        type: Sequelize.STRING,
+        allowNull:true
       },
       serviceableEquipment: {
-        type: Sequelize.STRING
+        type: Sequelize.STRING,
+        allowNull:true
       },
-      hsnCode: {
-        type: Sequelize.STRING
+      spareWarranty:{
+        type:Sequelize.BOOLEAN,
+        defaultValue:false,
       },
-      salesTax: {
-        type: Sequelize.STRING
-      },
-      purchaseTax: {
-        type: Sequelize.STRING
-      },
-      salesAccount: {
-        type: Sequelize.STRING
-      },
-      purchaseAccount: {
-        type: Sequelize.STRING
-      },
-      tariffCode: {
-        type: Sequelize.STRING
-      },
-      commodityCode: {
-        type: Sequelize.STRING
+      warrantyDuration:{
+        type:Sequelize.INTEGER,
+        allowNull:true
       },
       createdAt: {
         allowNull: false,

@@ -14,12 +14,12 @@ module.exports = {
         allowNull:false,
         unique:true
       },
-      customerId: {
-        type: Sequelize.INTEGER,
-        allowNull:false
-      },
       orderDate: {
         type: Sequelize.DATE,
+        allowNull:false
+      },
+      customerId: {
+        type: Sequelize.INTEGER,
         allowNull:false
       },
       quoteId: {
@@ -44,38 +44,7 @@ module.exports = {
         type:Sequelize.TEXT,
         allowNull:true
       },
-      currency:{
-        type:Sequelize.STRING,
-        defaultValue:"INR"
-      },
-      priceList:{
-        type:Sequelize.STRING,
-        allowNull:true
-      },
-      paymentTerms:{
-        type:Sequelize.STRING,
-        allowNull:true
-      },
-      creditPeriod:{
-        type:Sequelize.INTEGER,
-        allowNull:true
-      },
-      frieghtName:{
-        type:Sequelize.STRING,
-        allowNull:true
-      },
-      defaultTax:{
-        type:Sequelize.JSON,
-        allowNull:true
-      },
-      billingContact:{
-        type:Sequelize.STRING,
-        allowNull:true
-      },
-      billingAddress:{
-        type:Sequelize.STRING,
-        allowNull:true
-      },
+      
       deliveryPolicy:{
         type:Sequelize.STRING,
         allowNull:false
