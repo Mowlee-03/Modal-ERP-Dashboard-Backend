@@ -44,35 +44,6 @@ module.exports = {
         type:Sequelize.TEXT,
         allowNull:true
       },
-      
-      deliveryPolicy:{
-        type:Sequelize.STRING,
-        allowNull:false
-      },
-      deliveryDate:{
-        type:Sequelize.DATE,
-        allowNull:false
-      },
-      warehouse:{
-        type:Sequelize.STRING,
-        allowNull:true
-      },
-      consignee:{
-        type:Sequelize.STRING,
-        allowNull:true
-      },
-      modeOfDispatch:{
-        type:Sequelize.STRING,
-        allowNull:true
-      },
-      deliveryContact:{
-        type:Sequelize.STRING,
-        allowNull:true
-      },
-      deliveryAddress:{
-        type:Sequelize.STRING,
-        allowNull:false
-      },
       totalAmount: {
         type: Sequelize.FLOAT,
         defaultValue: 0.0,

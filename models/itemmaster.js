@@ -10,7 +10,8 @@ module.exports = (sequelize, DataTypes) => {
       ItemMaster.hasOne(models.PurchaseItemDetails,{foreignKey:"itemId",as:"purchaseDetails",onDelete:"CASCADE",onUpdate:"CASCADE"});
       ItemMaster.hasOne(models.SalesItemDetails,{foreignKey:"itemId",as:"salesDetails",onDelete:"CASCADE",onUpdate:"CASCADE"});
       ItemMaster.belongsTo(models.ItemGroup, {foreignKey: 'groupId',as: 'group',onDelete: 'SET NULL',onUpdate: 'CASCADE'});
-      ItemMaster.belongsTo(models.ItemCategory,{foreignKey:"categoryId",as:"category",onDelete:"SET NULL",onUpdate:"CASCADE"})
+      ItemMaster.belongsTo(models.ItemCategory,{foreignKey:"categoryId",as:"category",onDelete:"SET NULL",onUpdate:"CASCADE"});
+      ItemMaster.hasMany(models.SalesOrderItem,{foreignKey:"itemId",as:"salesOrderItems",onDelete:"CASCADE",onUpdate:"CASCADE"})
     }
   }
   ItemMaster.init({

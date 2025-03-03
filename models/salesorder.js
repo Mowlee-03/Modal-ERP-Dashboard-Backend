@@ -6,6 +6,8 @@ module.exports = (sequelize, DataTypes) => {
   class SalesOrder extends Model {
     static associate(models) {
       SalesOrder.hasOne(models.SoBillingDetails,{foreignKey:"salesOrderId",as:"billingDetail",onDelete:"CASCADE",onUpdate:"CASCADE"});
+      SalesOrder.hasOne(models.SoDeliveryDetails,{foreignKey:"salesOrderId",as:"deleiveryDetail",onDelete:"CASCADE",onUpdate:"CASCADE"});
+      SalesOrder.hasMany(models.SalesOrderItem,{foreignKey:"salesOrderId",as:"items",onDelete:"CASCADE",onUpdate:"CASCADE"})
     }
   }
   SalesOrder.init({
@@ -21,14 +23,6 @@ module.exports = (sequelize, DataTypes) => {
     salesPerson: DataTypes.STRING,
     territory: DataTypes.STRING,
     remarks:DataTypes.TEXT,
-
-    deliveryPolicy:DataTypes.STRING,//Like After Order,After Payement
-    deliveryDate:DataTypes.DATE,
-    warehouse:DataTypes.STRING,
-    consignee:DataTypes.STRING,
-    modeOfDispatch:DataTypes.STRING,
-    deliveryContact:DataTypes.STRING,
-    deliveryAddress:DataTypes.STRING,
 
     totalAmount:DataTypes.FLOAT,
     amountWithTax:DataTypes.FLOAT,
