@@ -24,6 +24,7 @@ module.exports = (sequelize, DataTypes) => {
     territory: DataTypes.STRING,
     remarks:DataTypes.TEXT,
 
+    additionalCharges:DataTypes.JSON,
     totalAmount:DataTypes.FLOAT,
     amountWithTax:DataTypes.FLOAT,
     roundOffMethod:DataTypes.STRING,

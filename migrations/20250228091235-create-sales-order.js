@@ -44,6 +44,10 @@ module.exports = {
         type:Sequelize.TEXT,
         allowNull:true
       },
+      additionalCharges:{
+        type:Sequelize.JSON,
+        allowNull:true
+      },
       totalAmount: {
         type: Sequelize.FLOAT,
         defaultValue: 0.0,

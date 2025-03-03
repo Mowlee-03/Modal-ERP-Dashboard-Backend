@@ -2,76 +2,77 @@
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
   async up(queryInterface, Sequelize) {
-    await queryInterface.createTable('ItemMasters', {
+    await queryInterface.createTable('Contacts', {
       id: {
         allowNull: false,
         autoIncrement: true,
         primaryKey: true,
         type: Sequelize.INTEGER
       },
+      title: {
+        type: Sequelize.STRING,
+        allowNull:true
+      },
       name: {
         type: Sequelize.STRING,
-        allowNull:false,
-        unique:true
+        allowNull:true
       },
-      description: {
-        type: Sequelize.TEXT,
-        allowNull:false
-      },
-      itemType: {
+      designation: {
         type: Sequelize.STRING,
-        allowNull:false
+        allowNull:true
       },
-      categoryId: {
+      customerId: {
         type: Sequelize.INTEGER,
-        allowNull:true,
+        allowNull:false,
         references:{
-          model:"ItemCategories",
+          model:"Customers",
           key:"id"
         },
-        onDelete:"SET NULL",
+        onDelete:"CASCADE",
         onUpdate:"CASCADE"
       },
-      groupId: {
-        type: Sequelize.INTEGER,
-        allowNull:true,
-        references:{
-          model:"ItemGroups",
-          key:"id"
-        },
-        onUpdate:"CASCADE",
-        onDelete:"SET NULL"
-      },
-      baseUOM: {
-        type: Sequelize.STRING,
-        allowNull:false
-      },
-      barCode: {
+      email: {
         type: Sequelize.STRING,
         allowNull:true
       },
-      partCode: {
+      phone: {
         type: Sequelize.STRING,
         allowNull:true
       },
-      warranty: {
-        type: Sequelize.INTEGER,
-        allowNull:true
-      },
-      componentLocation: {
+      mobile: {
         type: Sequelize.STRING,
         allowNull:true
       },
-      serviceableEquipment: {
+      fax: {
         type: Sequelize.STRING,
         allowNull:true
       },
-      spareWarranty:{
-        type:Sequelize.BOOLEAN,
-        defaultValue:false,
+      salesPerson: {
+        type: Sequelize.STRING,
+        allowNull:true
       },
-      warrantyDuration:{
-        type:Sequelize.INTEGER,
+      primaryContact: {
+        type: Sequelize.BOOLEAN,
+        defaultValue:false
+      },
+      isActive: {
+        type: Sequelize.BOOLEAN,
+        defaultValue:false
+      },
+      source: {
+        type: Sequelize.STRING,
+        allowNull:true
+      },
+      territory: {
+        type: Sequelize.STRING,
+        allowNull:true
+      },
+      industry: {
+        type: Sequelize.STRING,
+        allowNull:true
+      },
+      remarks: {
+        type: Sequelize.TEXT,
         allowNull:true
       },
       createdAt: {
@@ -85,6 +86,8 @@ module.exports = {
     });
   },
   async down(queryInterface, Sequelize) {
-    await queryInterface.dropTable('ItemMasters');
+    await queryInterface.dropTable('Contacts');
   }
 };
+
+

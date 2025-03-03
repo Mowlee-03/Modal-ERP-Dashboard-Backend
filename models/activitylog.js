@@ -4,11 +4,7 @@ const {
 } = require('sequelize');
 module.exports = (sequelize, DataTypes) => {
   class ActivityLogs extends Model {
-    /**
-     * Helper method for defining associations.
-     * This method is not a part of Sequelize lifecycle.
-     * The `models/index` file will call this method automatically.
-     */
+    
     static associate(models) {
      ActivityLogs.belongsTo(models.User,{foreignKey:"userId",as:"user"})
      ActivityLogs.belongsTo(models.User, { foreignKey: 'executedBy', as: 'executor' }); // Executor of Action
@@ -29,3 +25,6 @@ module.exports = (sequelize, DataTypes) => {
   });
   return ActivityLogs;
 };
+
+
+
