@@ -43,7 +43,12 @@ const CreateCurrency=async (req,res) => {
 
 const GetCurrencies=async (req,res) => {
     try {
-        
+        const response =await Currency.findAll()
+        res.status(200).json({
+            status:200,
+            message:"Currency Getted Successfully",
+            data:response
+        })
     } catch (error) {
         console.log(error);
         res.status(500).json({
@@ -57,5 +62,5 @@ const GetCurrencies=async (req,res) => {
 
 module.exports={
     CreateCurrency,
-
+    GetCurrencies
 }
