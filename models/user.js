@@ -27,7 +27,14 @@ module.exports = (sequelize, DataTypes) => {
     tableName:"Users",
     hooks:{
       afterCreate:async (user,options) => {
-        const { ActivityLogs } =require("../models")
+        const { ActivityLogs,User } =require("../models")
+           // Count existing users
+        const userCount = await User.count();
+        
+        // Skip logging if this is the first user
+        if (userCount === 1) {
+          return;
+        }
         console.log(user);
         console.log(options);
         const createdFields = Object.keys(user.dataValues).map((field) => ({

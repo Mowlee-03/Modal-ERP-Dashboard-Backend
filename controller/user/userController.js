@@ -42,17 +42,21 @@ const CreateUser=async (req,res) => {
           }
         const hashpass=hashPassword(password)
 
+        const userCount = await Usercontroller.count();
         const create=await Usercontroller.create({
             username:username,
             email:email,
             password:hashpass,
             role_id:roleId,
             department_id:departmentId
-        },{
-            userId:req.user.id,
-            username:req.user.username,
-            ipAddress:req.ip,
-            userAgent:req.headers["user-agent"],
+        }, 
+        userCount === 0
+        ? {} // If it's the first user, don't pass options (prevents logging)
+        : {
+            userId: req.user?.id || null,
+            username: req.user?.username || "System",
+            ipAddress: req.ip || "Unknown",
+            userAgent: req.headers["user-agent"] || "Unknown",
         })
         res.status(200).json({
             status:200,
@@ -62,6 +66,8 @@ const CreateUser=async (req,res) => {
 
 
     } catch (error) {
+        console.log(error);
+        
         res.status(500).json({
             status:500,
             message:"An Error Accured",
