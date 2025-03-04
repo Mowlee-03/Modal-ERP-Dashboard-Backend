@@ -27,9 +27,15 @@ module.exports = {
         type:Sequelize.DATE,
         allowNull:false
       },
-      warehouse:{
-        type:Sequelize.STRING,
-        allowNull:true
+      warehouseId:{
+        type:Sequelize.INTEGER,
+        allowNull:true,
+        references:{
+          model:"Warehouses",
+          key:"id"
+        },
+        onDelete:"SET NULL",
+        onUpdate:"CASCADE"
       },
       consignee:{
         type:Sequelize.STRING,

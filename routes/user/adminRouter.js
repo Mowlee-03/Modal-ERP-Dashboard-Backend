@@ -15,7 +15,7 @@ const {
     viewAllroles,
     updateRolesToDepartmet,
     removeRoleFromDepartment
-} = require("../controller/adminController")
+} = require("../../controller/user/adminController")
 var router=express.Router()
 
 

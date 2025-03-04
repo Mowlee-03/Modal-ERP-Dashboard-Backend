@@ -2,38 +2,35 @@
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
   async up(queryInterface, Sequelize) {
-    await queryInterface.createTable('CustomerSupplierDetails', {
+    await queryInterface.createTable('pricelists', {
       id: {
         allowNull: false,
         autoIncrement: true,
         primaryKey: true,
         type: Sequelize.INTEGER
       },
-      customerId: {
-        type: Sequelize.INTEGER,
+      name: {
+        type: Sequelize.STRING,
+        allowNull:false,
+        unique:true
+      },
+      currencyId:{
+        type:Sequelize.INTEGER,
         allowNull:false,
         references:{
-          model:"Customers",
+          model:'Currencies',
           key:"id"
         },
         onDelete:"CASCADE",
         onUpdate:"CASCADE"
       },
-      payableAccount: {
+      description: {
         type: Sequelize.STRING,
-        allowNull:true
+        allowNull:false
       },
-      purchaseCreditPeriod: {
-        type: Sequelize.INTEGER,
-        allowNull:true
-      },
-      purchasePriceList: {
-        type: Sequelize.STRING,
-        allowNull:true
-      },
-      purchasePaymentTerms: {
-        type: Sequelize.STRING,
-        allowNull:true
+      isActive: {
+        type: Sequelize.BOOLEAN,
+        defaultValue:false
       },
       createdAt: {
         allowNull: false,
@@ -46,6 +43,6 @@ module.exports = {
     });
   },
   async down(queryInterface, Sequelize) {
-    await queryInterface.dropTable('CustomerSupplierDetails');
+    await queryInterface.dropTable('pricelists');
   }
 };

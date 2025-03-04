@@ -2,57 +2,77 @@
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
   async up(queryInterface, Sequelize) {
-    await queryInterface.createTable('CustomerLegalDetails', {
+    await queryInterface.createTable('Contacts', {
       id: {
         allowNull: false,
         autoIncrement: true,
         primaryKey: true,
         type: Sequelize.INTEGER
       },
-      customerId: {
+      title: {
+        type: Sequelize.STRING,
+        allowNull:true
+      },
+      name: {
+        type: Sequelize.STRING,
+        allowNull:true
+      },
+      designation: {
+        type: Sequelize.STRING,
+        allowNull:true
+      },
+      partnerId: {
         type: Sequelize.INTEGER,
         allowNull:false,
         references:{
-          model:"Customers",
+          model:"Parteners",
           key:"id"
         },
         onDelete:"CASCADE",
         onUpdate:"CASCADE"
       },
-      gstRegistrationType: {
+      email: {
         type: Sequelize.STRING,
         allowNull:true
       },
-      gstin: {
+      phone: {
         type: Sequelize.STRING,
         allowNull:true
       },
-      panNo: {
+      mobile: {
         type: Sequelize.STRING,
         allowNull:true
       },
-      tanNo: {
+      fax: {
         type: Sequelize.STRING,
         allowNull:true
       },
-      cinNo: {
+      salesPerson: {
         type: Sequelize.STRING,
         allowNull:true
       },
-      supplierCode: {
+      primaryContact: {
+        type: Sequelize.BOOLEAN,
+        defaultValue:false
+      },
+      isActive: {
+        type: Sequelize.BOOLEAN,
+        defaultValue:false
+      },
+      source: {
         type: Sequelize.STRING,
         allowNull:true
       },
-      msmeRegType: {
+      territory: {
         type: Sequelize.STRING,
         allowNull:true
       },
-      udayamRegNo: {
+      industry: {
         type: Sequelize.STRING,
         allowNull:true
       },
-      msmeRegisteredDate: {
-        type: Sequelize.DATE,
+      remarks: {
+        type: Sequelize.TEXT,
         allowNull:true
       },
       createdAt: {
@@ -66,6 +86,8 @@ module.exports = {
     });
   },
   async down(queryInterface, Sequelize) {
-    await queryInterface.dropTable('CustomerLegalDetails');
+    await queryInterface.dropTable('Contacts');
   }
 };
+
+

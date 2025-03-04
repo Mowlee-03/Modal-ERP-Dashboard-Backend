@@ -1,4 +1,4 @@
-const Model = require("../models");
+const Model = require("../../models");
 const {Op}=require('sequelize')
 const RoleController = Model.Role;
 const PermissionController=Model.Permission

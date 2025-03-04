@@ -7,8 +7,8 @@ const { CreateUser,
      getAlluser, 
      allActivityLogs,
      profileUpdate 
-    } = require('../controller/userController');
-const authMiddleware = require('../middleware/authMiddleware');
+    } = require('../../controller/user/userController');
+const authMiddleware = require('../../middleware/authMiddleware');
 var router = express.Router();
 
 router.post("/login",loginUser)

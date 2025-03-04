@@ -2,18 +2,18 @@
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
   async up(queryInterface, Sequelize) {
-    await queryInterface.createTable('CustomerGeneralDetails', {
+    await queryInterface.createTable('PartnerGeneralDetails', {
       id: {
         allowNull: false,
         autoIncrement: true,
         primaryKey: true,
         type: Sequelize.INTEGER
       },
-      customerId: {
+      partnerId: {
         type: Sequelize.INTEGER,
         allowNull:false,
         references:{
-          model:"Customers",
+          model:"Parteners",
           key:"id"
         },
         onDelete:"CASCADE",
@@ -23,9 +23,15 @@ module.exports = {
         type: Sequelize.STRING,
         allowNull:false
       },
-      territory: {
-        type: Sequelize.STRING,
-        allowNull:true
+      territoryId: {
+        type: Sequelize.INTEGER,
+        allowNull:true,
+        references:{
+          model:"Territories",
+          key:"id"
+        },
+        onDelete:"SET NULL",
+        onUpdate:"CASCADE"
       },
       website: {
         type: Sequelize.STRING,
@@ -50,6 +56,6 @@ module.exports = {
     });
   },
   async down(queryInterface, Sequelize) {
-    await queryInterface.dropTable('CustomerGeneralDetails');
+    await queryInterface.dropTable('PartnerGeneralDetails');
   }
 };

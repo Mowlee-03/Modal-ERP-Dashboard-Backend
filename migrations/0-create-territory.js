@@ -2,7 +2,7 @@
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
   async up(queryInterface, Sequelize) {
-    await queryInterface.createTable('Customers', {
+    await queryInterface.createTable('Territories', {
       id: {
         allowNull: false,
         autoIncrement: true,
@@ -13,29 +13,23 @@ module.exports = {
         type: Sequelize.STRING,
         allowNull:false
       },
-      isCompany: {
+      isParent: {
         type: Sequelize.BOOLEAN,
         defaultValue:true
       },
-      customer: {
-        type: Sequelize.BOOLEAN,
-        defaultValue:false
+      parentId: {
+        type: Sequelize.INTEGER,
+        allowNull:true,
+        references:{
+          model:"Territories",
+          key:"id"
+        },
+        onDelete:"SET NULL",
+        onUpdate:"CASCADE"
       },
-      supplier: {
+      isActive: {
         type: Sequelize.BOOLEAN,
-        defaultValue:false
-      },
-      competitor: {
-        type: Sequelize.BOOLEAN,
-        defaultValue:false
-      },
-      transporter: {
-        type: Sequelize.BOOLEAN,
-        defaultValue:false
-      },
-      transporterId: {
-        type: Sequelize.STRING,
-        allowNull:true
+        defaultValue:true
       },
       createdAt: {
         allowNull: false,
@@ -48,6 +42,6 @@ module.exports = {
     });
   },
   async down(queryInterface, Sequelize) {
-    await queryInterface.dropTable('Customers');
+    await queryInterface.dropTable('Territories');
   }
 };

@@ -20,7 +20,13 @@ module.exports = {
       },
       customerId: {
         type: Sequelize.INTEGER,
-        allowNull:false
+        allowNull:false,
+        references:{
+          model:"Parteners",
+          key:"id"
+        },
+        onDelete:"CASCADE",
+        onUpdate:"CASCADE"
       },
       quoteId: {
         type: Sequelize.INTEGER,
@@ -36,9 +42,15 @@ module.exports = {
         type: Sequelize.STRING,
         allowNull:true
       },
-      territory: {
-        type: Sequelize.STRING,
-        allowNull:true
+      territoryId: {
+        type: Sequelize.INTEGER,
+        allowNull:true,
+        references:{
+          model:"Territories",
+          key:"id"
+        },
+        onDelete:"SET NULL",
+        onUpdate:"CASCADE"
       },
       remarks:{
         type:Sequelize.TEXT,
@@ -73,7 +85,7 @@ module.exports = {
           defaultValue: 0.0,
       },
       termsAndConditions: {
-          type: Sequelize.STRING,
+          type: Sequelize.TEXT,
           allowNull: true,
       },
       createdAt: {

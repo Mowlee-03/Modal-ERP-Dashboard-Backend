@@ -2,53 +2,37 @@
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
   async up(queryInterface, Sequelize) {
-    await queryInterface.createTable('ItemGroups', {
+    await queryInterface.createTable('SupplierDetails', {
       id: {
         allowNull: false,
         autoIncrement: true,
         primaryKey: true,
         type: Sequelize.INTEGER
       },
-      groupName: {
-        type: Sequelize.STRING,
-        allowNull:false
-      },
-      isParent: {
-        type: Sequelize.BOOLEAN,
-        defaultValue:true
-      },
-      parentGroupId: {
+      supplierId: {
         type: Sequelize.INTEGER,
-        allowNull:true,
+        allowNull:false,
         references:{
-          model:"ItemGroups",
+          model:"Parteners",
           key:"id"
         },
         onDelete:"CASCADE",
-        onUpdate:"SET NULL"
+        onUpdate:"CASCADE"
       },
-      salesTax: {
-        type: Sequelize.JSON,
-        allowNull:true
-      },
-      purchaseTax: {
-        type: Sequelize.JSON,
-        allowNull:true
-      },
-      incomeAccount: {
+      payableAccount: {
         type: Sequelize.STRING,
         allowNull:true
       },
-      expenseAccount: {
+      purchaseCreditPeriod: {
+        type: Sequelize.INTEGER,
+        allowNull:true
+      },
+      purchasePriceList: {
         type: Sequelize.STRING,
         allowNull:true
       },
-      hsnSacCode: {
+      purchasePaymentTerms: {
         type: Sequelize.STRING,
-        allowNull:true
-      },
-      description: {
-        type: Sequelize.TEXT,
         allowNull:true
       },
       createdAt: {
@@ -62,6 +46,6 @@ module.exports = {
     });
   },
   async down(queryInterface, Sequelize) {
-    await queryInterface.dropTable('ItemGroups');
+    await queryInterface.dropTable('SupplierDetails');
   }
 };

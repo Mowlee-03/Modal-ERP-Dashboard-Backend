@@ -6,7 +6,7 @@ module.exports = (sequelize, DataTypes) => {
   class Contact extends Model {
 
     static associate(models) {
-      Contact.belongsTo(models.Customer,{foreignKey:'customerId',as:"customer",onDelete:"CASCADE",onUpdate:"CASCADE"});
+      Contact.belongsTo(models.Partner,{foreignKey:'partnerId',as:"customer",onDelete:"CASCADE",onUpdate:"CASCADE"});
       Contact.hasMany(models.Address,{foreignKey:"contactId",as:"addresses",onDelete:"CASCADE",onUpdate:"CASCADE"});
     }
   }

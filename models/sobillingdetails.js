@@ -7,12 +7,14 @@ module.exports = (sequelize, DataTypes) => {
 
     static associate(models) {
       SoBillingDetails.belongsTo(models.SalesOrder,{foreignKey:"salesOrderId",as:"salesOrder",onDelete:"CASCADE",onUpdate:"CASCADE"});
+      SoBillingDetails.belongsTo(models.Currency,{foreignKey:"currencyId",as:"currency",onDelete:"CASCADE",onUpdate:"CASCADE"});
+      SoBillingDetails.belongsTo(models.pricelists,{foreignKey:"priceListId",as:"pricelist",onDelete:"CASCADE",onUpdate:"CASCADE"})
     }
   }
   SoBillingDetails.init({
     salesOrderId: DataTypes.INTEGER,
-    currency: DataTypes.STRING,
-    priceList: DataTypes.STRING,
+    currencyId: DataTypes.INTEGER,
+    priceListId: DataTypes.INTEGER,
     paymentTerms: DataTypes.STRING,
     creditPeriod: DataTypes.INTEGER,
     frieghtName: DataTypes.STRING,

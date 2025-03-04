@@ -10,7 +10,7 @@ module.exports = (sequelize, DataTypes) => {
      * The `models/index` file will call this method automatically.
      */
     static associate(models) {
-      CustomerDetails.belongsTo(models.Customer,{foreignKey:"customerId",as:"customer",onDelete:"CASCADE",onUpdate:"CASCADE"});
+      CustomerDetails.belongsTo(models.Partner,{foreignKey:"customerId",as:"customer",onDelete:"CASCADE",onUpdate:"CASCADE"});
       CustomerDetails.belongsTo(models.CustomerGroup,{foreignKey:"customerGroupId",as:"customerGroup",onDelete:"SET NULL",onUpdate:"CASCADE"});
     }
   }

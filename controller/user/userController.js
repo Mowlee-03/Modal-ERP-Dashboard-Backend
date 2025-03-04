@@ -1,10 +1,10 @@
 const { where } = require("sequelize")
-const Model=require("../models")
-const { hashPassword, verifyPassword } = require("../utils/password")
+const Model=require("../../models")
+const { hashPassword, verifyPassword } = require("../../utils/password")
 const Usercontroller =Model.User
 const DepartmentRoleController=Model.DepartmentRoles
 const ActivityLogsController=Model.ActivityLogs
-const { verifyToken, generateToken, setAuthTokenCookie } = require("../utils/token")
+const { verifyToken, generateToken, setAuthTokenCookie } = require("../../utils/token")
 const geolib = require("geolib");
 
 

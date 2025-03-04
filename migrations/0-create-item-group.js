@@ -2,53 +2,53 @@
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
   async up(queryInterface, Sequelize) {
-    await queryInterface.createTable('SoBillingDetails', {
+    await queryInterface.createTable('ItemGroups', {
       id: {
         allowNull: false,
         autoIncrement: true,
         primaryKey: true,
         type: Sequelize.INTEGER
       },
-      salesOrderId: {
+      groupName: {
+        type: Sequelize.STRING,
+        allowNull:false
+      },
+      isParent: {
+        type: Sequelize.BOOLEAN,
+        defaultValue:true
+      },
+      parentGroupId: {
         type: Sequelize.INTEGER,
-        allowNull:false,
+        allowNull:true,
         references:{
-          model:"SalesOrders",
+          model:"ItemGroups",
           key:"id"
         },
-        onUpdate:"CASCADE",
-        onDelete:"CASCADE"
+        onDelete:"SET NULL",
+        onUpdate:"CASCADE"
       },
-      currency:{
-        type:Sequelize.STRING,
-        defaultValue:"INR"
-      },
-      priceList:{
-        type:Sequelize.STRING,
+      salesTax: {
+        type: Sequelize.JSON,
         allowNull:true
       },
-      paymentTerms:{
-        type:Sequelize.STRING,
+      purchaseTax: {
+        type: Sequelize.JSON,
         allowNull:true
       },
-      creditPeriod:{
-        type:Sequelize.INTEGER,
+      incomeAccount: {
+        type: Sequelize.STRING,
         allowNull:true
       },
-      frieghtName:{
-        type:Sequelize.STRING,
+      expenseAccount: {
+        type: Sequelize.STRING,
         allowNull:true
       },
-      defaultTax:{
-        type:Sequelize.JSON,
+      hsnSacCode: {
+        type: Sequelize.STRING,
         allowNull:true
       },
-      billingContact:{
-        type:Sequelize.STRING,
-        allowNull:true
-      },
-      billingAddress:{
-        type:Sequelize.STRING,
+      description: {
+        type: Sequelize.TEXT,
         allowNull:true
       },
       createdAt: {
@@ -62,6 +62,6 @@ module.exports = {
     });
   },
   async down(queryInterface, Sequelize) {
-    await queryInterface.dropTable('SoBillingDetails');
+    await queryInterface.dropTable('ItemGroups');
   }
 };
