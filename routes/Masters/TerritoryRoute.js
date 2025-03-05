@@ -1,8 +1,9 @@
 const express=require("express")
 const { createTerritory, getAllTerritories } = require("../../controller/Masters/TerritoryController")
 const router=express.Router()
+const authMiddleware = require("../../middleware/authMiddleware")
 
-router.post("/create_territory",createTerritory)
-router.post("/get_all_territories",getAllTerritories)
+router.post("/create_territory",authMiddleware,createTerritory)
+router.post("/get_all_territories",authMiddleware,getAllTerritories)
 
 module.exports=router
