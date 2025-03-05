@@ -7,7 +7,7 @@ var cors=require("cors")
 
 var adminRouter=require("./routes/user/adminRouter")
 var userRouter=require("./routes/user/usersRoutes")
-
+var apiRoutes=require("./routes/apiRoutes")
  
 var app = express();
 const db = require('./models');  // Correct path
@@ -29,7 +29,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use("/api/admin",adminRouter)
 app.use("/api/user",userRouter)
-
+app.use("/api",apiRoutes)
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
   next(createError(404));

@@ -17,6 +17,26 @@ module.exports = (sequelize, DataTypes) => {
   }, {
     sequelize,
     modelName: 'Currency',
+    hooks:{
+      afterCreate:async (currency,options) => {
+        const {ActivityLogs}=require("../models")
+
+        await ActivityLogs.create({
+          userId:options.userId,
+          executedBy: options.userId,
+          action:"Currency Created",
+          tableName:"Currency",
+          details:[{
+            message:`${currency.name}:Currency Created by ${options.username}`
+          }],
+          ipAddress: options.ipAddress || "Unknown",
+          userAgent: options.userAgent || "Unknown",
+        })
+
+
+
+      }
+    }
   });
   return Currency;
 };

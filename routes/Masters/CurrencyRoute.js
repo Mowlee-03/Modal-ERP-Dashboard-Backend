@@ -4,7 +4,7 @@ var router=express.Router()
 
 
 router.post("/create_currency",CreateCurrency)
-router.post("/get_currencies",GetCurrencies)
+router.get("/get_currencies",GetCurrencies)
 
 
 module.exports=router

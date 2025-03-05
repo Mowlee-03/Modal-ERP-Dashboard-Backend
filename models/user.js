@@ -35,8 +35,6 @@ module.exports = (sequelize, DataTypes) => {
         if (userCount === 1) {
           return;
         }
-        console.log(user);
-        console.log(options);
         const createdFields = Object.keys(user.dataValues).map((field) => ({
           field,
           newValue: user.dataValues[field],
@@ -57,8 +55,6 @@ module.exports = (sequelize, DataTypes) => {
       afterUpdate:async (user,options) => {
         const { ActivityLogs } =require("../models")
         const changes=[];
-console.log(user);
-console.log(options);
 
         Object.keys(user._previousDataValues).forEach((field) => {
           if (user._previousDataValues[field] !== user.dataValues[field]) {

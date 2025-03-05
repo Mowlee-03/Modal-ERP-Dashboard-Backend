@@ -17,6 +17,24 @@ module.exports = (sequelize, DataTypes) => {
   }, {
     sequelize,
     modelName: 'pricelists',
+    hooks:{
+      afterCreate:async (pricelist,options) => {
+        const {ActivityLogs}=require("../models")
+        await ActivityLogs.create({
+          userId:options.userId,
+          executedBy: options.userId,
+          action:"Pricelist Added",
+          tableName:"Pricelist",
+          details:[{
+            message:`${pricelist.name}:pricelist addedd by ${options.username}`
+          }],
+          ipAddress: options.ipAddress || "Unknown",
+          userAgent: options.userAgent || "Unknown",
+        })
+
+
+      }
+    }
   });
   return pricelists;
 };

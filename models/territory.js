@@ -19,6 +19,22 @@ module.exports = (sequelize, DataTypes) => {
   }, {
     sequelize,
     modelName: 'Territory',
+    hooks:{
+      afterCreate:async (territory,options) => {
+        const {ActivityLogs}=require("../models")
+        await ActivityLogs.create({
+          userId:options.userId,
+          executedBy: options.userId,
+          action:"Territory Created",
+          tableName:"Territory",
+          details:[{
+            message:`${territory.name}:territory created by ${options.username}`
+          }],
+          ipAddress: options.ipAddress || "Unknown",
+          userAgent: options.userAgent || "Unknown",
+        })
+      }
+    }
   });
   return Territory;
 };

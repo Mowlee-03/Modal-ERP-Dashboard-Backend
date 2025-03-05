@@ -3,8 +3,9 @@ const {Currency}=require("../../models")
 
 const CreateCurrency=async (req,res) => {
     const user=req.user
+    
      // Check if the user has the 'create' permission
-     if (!user?.permission?.includes("create")) {
+     if (!user?.permissions?.includes("create")) {
         return res.status(403).json({
             status: 403,
             message: "Forbidden: You don't have permission to create currency."
@@ -24,6 +25,11 @@ const CreateCurrency=async (req,res) => {
         const response=await Currency.create({
             name:name,
             exchangeRate:exchangeRate
+        },{
+            userId:user?.id,
+            username:user?.username || "System",
+            ipAddress: req.ip || "Unknown",
+            userAgent: req.headers["user-agent"] || "Unknown",
         })
         res.status(200).json({
             status:200,
