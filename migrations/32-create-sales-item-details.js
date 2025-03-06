@@ -20,13 +20,16 @@ module.exports = {
         onDelete: 'CASCADE'
       },
       recommendedSellingPrice: {
-        type: Sequelize.FLOAT
+        type: Sequelize.FLOAT,
+        defaultValue:0.0
       },
       minimumSellingPrice: {
-        type: Sequelize.FLOAT
+        type: Sequelize.FLOAT,
+        defaultValue:0.0
       },
       salesUOM: {
-        type: Sequelize.STRING
+        type: Sequelize.STRING,
+        allowNull:false
       },
       createdAt: {
         allowNull: false,

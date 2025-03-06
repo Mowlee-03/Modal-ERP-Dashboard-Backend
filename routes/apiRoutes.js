@@ -3,15 +3,25 @@ const router=express.Router()
 const authMiddleware = require("../middleware/authMiddleware")
 
 
+const partnerRoute=require("./Partners/partnerRoute")
 const currencyRoute=require("./Masters/CurrencyRoute")
 const pricelistRoute=require("./Masters/PricelistRoute")
 const territoriesRoute=require("./Masters/TerritoryRoute")
 const warehouseRoute=require("./Masters/WarehouseRoute")
+const customerRoute=require("./Partners/customerRoute")
+const supplierRoute=require("./Partners/supplierRoute")
+
+
 
 router.use("/currency",authMiddleware,currencyRoute)
 router.use("/pricelists",authMiddleware,pricelistRoute)
 router.use("/territory",authMiddleware,territoriesRoute)
 router.use("/warehouse",authMiddleware,warehouseRoute)
+router.use("/partner",authMiddleware,partnerRoute)
+router.use("/customer",authMiddleware,customerRoute)
+router.use("/supplier",authMiddleware,supplierRoute)
+
+
 
 
 

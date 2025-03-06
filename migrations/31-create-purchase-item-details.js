@@ -20,28 +20,38 @@ module.exports = {
         onDelete: 'CASCADE'
       },
       defaultPurchaseCost: {
-        type: Sequelize.FLOAT
+        type: Sequelize.FLOAT,
+        defaultValue:0.0
       },
       landingCostMultiple: {
-        type: Sequelize.FLOAT
+        type: Sequelize.FLOAT,
+        defaultValue:0.0
       },
       purchaseUOM: {
-        type: Sequelize.STRING
-      },
-      box: {
-        type: Sequelize.STRING
+        type: Sequelize.STRING,
+        allowNull:false
       },
       safetyStock: {
-        type: Sequelize.FLOAT
+        type: Sequelize.FLOAT,
+        defaultValue:0.0
       },
       reorderQty: {
-        type: Sequelize.FLOAT
+        type: Sequelize.FLOAT,
+        defaultValue:0.0
       },
       leadTime: {
-        type: Sequelize.INTEGER
+        type: Sequelize.INTEGER,
+        allowNull:true
       },
-      defaultSupplier: {
-        type: Sequelize.STRING
+      supplierId: {
+        type: Sequelize.INTEGER,
+        allowNull:true,
+        references:{
+          model:"Partners",
+          key:"id"
+        },
+        onDeleteL:"SET NULL",
+        onUpdate:"CASCADE"
       },
       createdAt: {
         allowNull: false,

@@ -62,18 +62,6 @@ module.exports = {
         type: Sequelize.STRING,
         allowNull:true
       },
-      serviceableEquipment: {
-        type: Sequelize.STRING,
-        allowNull:true
-      },
-      spareWarranty:{
-        type:Sequelize.BOOLEAN,
-        defaultValue:false,
-      },
-      warrantyDuration:{
-        type:Sequelize.INTEGER,
-        allowNull:true
-      },
       createdAt: {
         allowNull: false,
         type: Sequelize.DATE

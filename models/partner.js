@@ -10,8 +10,9 @@ module.exports = (sequelize, DataTypes) => {
       Partner.hasMany(models.Contact,{foreignKey:"partnerId",as:"contactDetails",onDelete:"CASCADE",onUpdate:"CASCADE"});
       Partner.hasOne(models.PartnerGeneralDetails,{foreignKey:"partnerId",as:"generalDetails",onDelete:"CASCADE",onUpdate:"CASCADE"});
       Partner.hasOne(models.PartnerLegalDetails,{foreignKey:"partnerId",as:"legalDetails",onDelete:"CASCADE",onUpdate:"CASCADE"});
-      Partner.hasOne(models.CustomerDetails,{foreignKey:"customerId",as:"details",onDelete:"CASCADE",onUpdate:"CASCADE"});
+      Partner.hasOne(models.CustomerDetails,{foreignKey:"customerId",as:"customerDetails",onDelete:"CASCADE",onUpdate:"CASCADE"});
       Partner.hasOne(models.SupplierDetails,{foreignKey:"supplierId",as:"supplierDetails",onDelete:"CASCADE",onUpdate:"CASCADE"});
+      Partner.hasMany(models.PurchaseItemDetails,{foreignKey:"supplierId",as:"purchaseItems",onDelete:"CASCADE",onUpdate:"CASCADE"});
     }
   }
   Partner.init({

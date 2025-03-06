@@ -7,6 +7,7 @@ module.exports = (sequelize, DataTypes) => {
     static associate(models) {
       pricelists.hasMany(models.SoBillingDetails,{foreignKey:"priceListId",as:"SoBillings",onDelete:"CASCADE",onUpdate:"CASCADE"});
       pricelists.belongsTo(models.Currency,{foreignKey:"currencyId",as:"currency",onDelete:"CASCADE",onUpdate:"CASCADE"})
+      pricelists.hasMany(models.CustomerDetails,{foreignKey:"priceListId",as:"customerDetails",onDelete:"CASCADE",onUpdate:"CASCADE"});
     }
   }
   pricelists.init({

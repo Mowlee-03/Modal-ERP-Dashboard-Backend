@@ -10,7 +10,9 @@ module.exports = (sequelize, DataTypes) => {
      * The `models/index` file will call this method automatically.
      */
     static associate(models) {
-      PurchaseItemDetails.belongsTo(models.ItemMaster,{foreignKey:"itemId",as:"item",onDelete:"CASCADE",onUpdate:"CASCADE"})
+      PurchaseItemDetails.belongsTo(models.ItemMaster,{foreignKey:"itemId",as:"item",onDelete:"CASCADE",onUpdate:"CASCADE"});
+      PurchaseItemDetails.belongsTo(models.Partner,{foreignKey:"supplierId",as:"defaultSupplier",onDelete:"SET NULL",onUpdate:"CASCADE"});
+
     }
   }
   PurchaseItemDetails.init({
@@ -18,11 +20,10 @@ module.exports = (sequelize, DataTypes) => {
     defaultPurchaseCost: DataTypes.FLOAT,
     landingCostMultiple: DataTypes.FLOAT,
     purchaseUOM: DataTypes.STRING,
-    box: DataTypes.STRING,
     safetyStock: DataTypes.FLOAT,
     reorderQty: DataTypes.FLOAT,
     leadTime: DataTypes.INTEGER,
-    defaultSupplier: DataTypes.STRING
+    supplierId: DataTypes.INTEGER
   }, {
     sequelize,
     modelName: 'PurchaseItemDetails',

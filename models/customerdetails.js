@@ -12,6 +12,7 @@ module.exports = (sequelize, DataTypes) => {
     static associate(models) {
       CustomerDetails.belongsTo(models.Partner,{foreignKey:"customerId",as:"customer",onDelete:"CASCADE",onUpdate:"CASCADE"});
       CustomerDetails.belongsTo(models.CustomerGroup,{foreignKey:"customerGroupId",as:"customerGroup",onDelete:"SET NULL",onUpdate:"CASCADE"});
+      CustomerDetails.belongsTo(models.pricelists,{foreignKey:"priceListId",as:"pricelist",onDelete:"SET NULL",onUpdate:"CASCADE"})
     }
   }
   CustomerDetails.init({
@@ -19,7 +20,7 @@ module.exports = (sequelize, DataTypes) => {
     customerGroupId: DataTypes.STRING,
     salesPerson: DataTypes.STRING,
     collectionPerson: DataTypes.STRING,
-    priceList: DataTypes.STRING,
+    priceListId: DataTypes.INTEGER,
     creditPeriod: DataTypes.INTEGER,
     creditLimit: DataTypes.DECIMAL,
     receivableAccount: DataTypes.STRING,

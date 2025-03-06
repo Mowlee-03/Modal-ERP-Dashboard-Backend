@@ -37,9 +37,15 @@ module.exports = {
         type: Sequelize.STRING,
         allowNull:true
       },
-      priceList: {
-        type: Sequelize.STRING,
-        allowNull:true
+      priceListId: {
+        type: Sequelize.INTEGER,
+        allowNull:true,
+        references:{
+          model:"pricelists",
+          key:"id"
+        },
+        onDelete:"SET NULL",
+        onUpdate:"CASCADE"
       },
       creditPeriod: {
         type: Sequelize.INTEGER,
