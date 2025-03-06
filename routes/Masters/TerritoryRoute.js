@@ -4,6 +4,6 @@ const router=express.Router()
 const authMiddleware = require("../../middleware/authMiddleware")
 
 router.post("/create_territory",authMiddleware,createTerritory)
-router.post("/get_all_territories",authMiddleware,getAllTerritories)
+router.get("/get_all_territories",authMiddleware,getAllTerritories)
 
 module.exports=router

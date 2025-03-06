@@ -53,11 +53,11 @@ module.exports = {
       },
       primaryContact: {
         type: Sequelize.BOOLEAN,
-        defaultValue:false
+        defaultValue:true
       },
       isActive: {
         type: Sequelize.BOOLEAN,
-        defaultValue:false
+        defaultValue:true
       },
       source: {
         type: Sequelize.STRING,

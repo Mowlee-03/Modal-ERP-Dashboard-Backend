@@ -15,7 +15,7 @@ module.exports = {
       },
       isCompany: {
         type: Sequelize.BOOLEAN,
-        defaultValue:true
+        defaultValue:false
       },
       customer: {
         type: Sequelize.BOOLEAN,
@@ -36,6 +36,10 @@ module.exports = {
       transporterId: {
         type: Sequelize.STRING,
         allowNull:true
+      },
+      isActive:{
+        type:Sequelize.BOOLEAN,
+        defaultValue:true
       },
       createdAt: {
         allowNull: false,

@@ -21,6 +21,7 @@ module.exports = {
       },
       customerGroupId: {
         type: Sequelize.INTEGER,
+        allowNull:true,
         references:{
           model:"CustomerGroups",
           key:"id"
@@ -33,28 +34,36 @@ module.exports = {
         allowNull:true
       },
       collectionPerson: {
-        type: Sequelize.STRING
+        type: Sequelize.STRING,
+        allowNull:true
       },
       priceList: {
-        type: Sequelize.STRING
+        type: Sequelize.STRING,
+        allowNull:true
       },
       creditPeriod: {
-        type: Sequelize.INTEGER
+        type: Sequelize.INTEGER,
+        allowNull:true
       },
       creditLimit: {
-        type: Sequelize.DECIMAL
+        type: Sequelize.DECIMAL,
+        allowNull:true
       },
       receivableAccount: {
-        type: Sequelize.STRING
+        type: Sequelize.STRING,
+        allowNull:true
       },
       paymentTerms: {
-        type: Sequelize.STRING
+        type: Sequelize.STRING,
+        allowNull:true
       },
       modeOfDispatch: {
-        type: Sequelize.STRING
+        type: Sequelize.STRING,
+        allowNull:true
       },
       freight: {
-        type: Sequelize.STRING
+        type: Sequelize.STRING,
+        allowNull:true
       },
       createdAt: {
         allowNull: false,
