@@ -79,6 +79,22 @@ module.exports = {
         type: Sequelize.BOOLEAN,
         defaultValue:false
       },
+      useForCasualLabour:{
+        type:Sequelize.BOOLEAN,
+        defaultValue:false
+      },
+      useForInternalLabour:{
+        type:Sequelize.BOOLEAN,
+        defaultValue:false
+      },
+      activityType:{
+        type:Sequelize.STRING,
+        allowNull:true
+      },
+      useForOandM:{
+        type:Sequelize.BOOLEAN,
+        defaultValue:false
+      },
       createdAt: {
         allowNull: false,
         type: Sequelize.DATE
