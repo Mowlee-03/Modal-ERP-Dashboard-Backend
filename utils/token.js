@@ -1,7 +1,7 @@
 const jwt=require("jsonwebtoken")
 
 const generateToken = (payload) => {
-    console.log(payload)
+
     return jwt.sign(payload, process.env.JWT_SECRET, {
       expiresIn: process.env.JWT_EXPIRES_IN || '1h'
     });
@@ -20,7 +20,7 @@ const generateToken = (payload) => {
     }
 };
 
-  const setAuthTokenCookie = (res, token) => {
+  const setAuthTokenCookie = (res, token) => {   
       res.cookie('authToken', token, {
           httpOnly: true, // Prevent access from JavaScript (mitigates XSS attacks)
           secure: process.env.NODE_ENV==="production",

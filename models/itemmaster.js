@@ -5,6 +5,11 @@ const {
 module.exports = (sequelize, DataTypes) => {
   class ItemMaster extends Model {
     static associate(models) {
+      // One ItemMaster can have multiple Sales Kits
+      ItemMaster.hasMany(models.SalesItemKit, {foreignKey: 'parentItemId',as: 'salesKits',onDelete: 'CASCADE',onUpdate: 'CASCADE'});
+      // One ItemMaster can also be part of a Sales Kit (as a child)
+      ItemMaster.hasMany(models.SalesItemKit, {foreignKey: 'childItemId',as: 'kitComponents',onDelete: 'CASCADE',onUpdate: 'CASCADE'});
+
       ItemMaster.hasOne(models.ItemAccountDetails, {foreignKey: 'itemId',as: 'accountDetails',onDelete: 'CASCADE',onUpdate: 'CASCADE'});
       ItemMaster.hasOne(models.ItemSettings,{foreignKey:"itemId",as:"settings",onDelete: 'CASCADE',onUpdate: 'CASCADE'});
       ItemMaster.hasOne(models.PurchaseItemDetails,{foreignKey:"itemId",as:"purchaseDetails",onDelete:"CASCADE",onUpdate:"CASCADE"});

@@ -79,115 +79,95 @@ const CreateUser=async (req,res) => {
 const loginUser = async (req, res) => {
     try {
         const { email, password, userLocation } = req.body;
-        console.log(userLocation);
-
-        
+        console.log("User Location:", userLocation);
 
         const userdata = await Usercontroller.findOne({
-            where: { email: email },
+            where: { email },
             include: [
                 {
                     model: Model.Role,
-                    as: 'role',
+                    as: "role",
                     include: {
                         model: Model.Permission,
-                        as: 'permissions',
+                        as: "permissions",
                         through: { attributes: [] },
-                        attributes: ['action']
-                    }
+                        attributes: ["action"],
+                    },
                 },
-                {
-                    model: Model.Department,
-                    as: 'department'
-                },
-                {
-                    model: Model.AllowedAreas,
-                    as: 'AllowedAreas'
-                }
-            ]
+                { model: Model.Department, as: "department" },
+                { model: Model.AllowedAreas, as: "AllowedAreas" },
+            ],
         });
 
         if (!userdata) {
-            return res.status(404).json({
-                status: 404,
-                message: "User Not Found"
-            });
+            return res.status(404).json({ status: 404, message: "User Not Found" });
         }
 
         // Verify password
         const verifyPass = await verifyPassword(password, userdata.password);
         if (!verifyPass) {
-            return res.status(403).json({
-                status: 403,
-                message: "Invalid Password"
-            });
+            return res.status(403).json({ status: 403, message: "Invalid Password" });
         }
 
-        // Get role, permissions, and department info
-        const roleName = userdata.role ? userdata.role.name : null;
-        const permissions = userdata.role?.permissions
-            ? userdata.role.permissions.map(perm => perm.action)
-            : [];
-        const departmentName = userdata.department ? userdata.department.department_name : null;
-        
-        if (!userLocation && departmentName !== "all") {
-            return res.status(404).json({
-                status: 404,
-                message: "Location Not Found"
-            });
-        }
-        // If user has a department, allow access without location check
+        // Extract user details
+        const roleName = userdata.role?.name || null;
+        const permissions = userdata.role?.permissions?.map(perm => perm.action) || [];
+        const departmentName = userdata.department?.department_name || null;
+
+        // If department is "all", bypass location validation
         if (departmentName !== "all") {
-            // Check if user is within the allowed area
-            let isAllowed = false;
-            for (const area of userdata.AllowedAreas) {
-                if (area.type === "polygon") {
-                    isAllowed = geolib.isPointInPolygon(userLocation, area.coordinates);
-                } else if (area.type === "circle") {
-                    isAllowed = geolib.isPointWithinRadius(userLocation, area.coordinates, area.radius);
-                }
-                if (isAllowed) break;
+            if (!userLocation) {
+                return res.status(400).json({ status: 400, message: "Location Not Found" });
             }
+
+            // Check if user has allowed areas assigned
+            if (!userdata.AllowedAreas?.length) {
+                return res.status(403).json({ status: 403, message: "No allowed areas assigned!" });
+            }
+
+            let isAllowed = userdata.AllowedAreas.some(area => {
+                if (area.type === "polygon") {
+                    return geolib.isPointInPolygon(userLocation, area.coordinates);
+                } else if (area.type === "circle") {
+                    return geolib.isPointWithinRadius(userLocation, area.coordinates, area.radius);
+                }
+                return false;
+            });
 
             if (!isAllowed) {
-                return res.status(403).json({
-                    status: 403,
-                    message: "You are not in the allowed area!"
-                });
+                return res.status(403).json({ status: 403, message: "You are not in the allowed area!" });
             }
         }
 
-        // Generate token
+        // Generate JWT Token
         const token = generateToken({
             id: userdata.id,
             username: userdata.username,
             role: roleName,
-            permissions: permissions,
-            department: departmentName
+            permissions,
+            department: departmentName,
         });
 
-        // Set authentication token cookie
+        // Set authentication cookie
         setAuthTokenCookie(res, token);
+
+
 
         await userdata.update({ 
             is_Active:true,
             last_login: new Date()
-         },{userId:userdata.id,ipAddress:req.ip,userAgent:req.headers["user-agent"],action:"User Logged in"});
+        },{userId:userdata.id,ipAddress:req.ip,userAgent:req.headers["user-agent"],action:"User Logged in"});
 
         res.status(200).json({
             status: 200,
             message: "Login Successful",
         });
     } catch (error) {
-        console.log(error.message);
-
-        return res.status(500).json({
-            status: 500,
-            message: "Internal Server Error",
-            error: error.message
-        });
+        console.error("Login Error:", error);
+        return res.status(500).json({ status: 500, message: "Internal Server Error", error: error.message });
     }
 };
+
 
 const USER_INFO=async(req, res) => {  
   try {
