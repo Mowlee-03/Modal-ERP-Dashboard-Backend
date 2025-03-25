@@ -12,7 +12,7 @@ const authMiddleware = require('../../middleware/authMiddleware');
 var router = express.Router();
 
 router.post("/login",loginUser)
-router.post("/create",authMiddleware,CreateUser)
+router.post("/create",CreateUser)
 router.post("/logout",authMiddleware,logoutUser)
 router.put("/profile_update/:userId",authMiddleware,profileUpdate)
 

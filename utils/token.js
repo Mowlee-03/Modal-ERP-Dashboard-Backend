@@ -22,7 +22,7 @@ const generateToken = (payload) => {
 
   const setAuthTokenCookie = (res, token) => {   
       res.cookie('authToken', token, {
-          httpOnly: true, // Prevent access from JavaScript (mitigates XSS attacks)
+          httpOnly: false, // Prevent access from JavaScript (mitigates XSS attacks)
           secure: process.env.NODE_ENV==="production",
           sameSite: 'strict', // Protect against CSRF
           maxAge: 60 * 60 * 1000, 
