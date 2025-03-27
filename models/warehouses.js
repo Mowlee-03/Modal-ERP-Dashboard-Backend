@@ -10,7 +10,8 @@ module.exports = (sequelize, DataTypes) => {
     }
   }
   Warehouses.init({
-    name: DataTypes.STRING
+    name: DataTypes.STRING,
+    isActive:DataTypes.BOOLEAN
   }, {
     sequelize,
     modelName: 'Warehouses',

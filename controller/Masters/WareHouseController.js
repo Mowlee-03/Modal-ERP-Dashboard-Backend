@@ -14,7 +14,7 @@ const createWareHouse=async (req,res) => {
     try {
         const {name}=req.body
         const checkWarehosue=await Warehouses.findOne({where:{name:name}})
-        if (!checkWarehosue) {
+        if (checkWarehosue) {
             return res.status(409).json({
                 status:409,
                 message:"Warehouse Already Exist"
@@ -73,7 +73,7 @@ const updateWareHouse=async (req,res) => {
 
     try {
         const {warehouseId}=req.params
-        const {name}=req.body
+        const {name,isActive}=req.body
         const warehouse=await Warehouses.findOne({where:{id:warehouseId}})
         if (!warehouse) {
             return res.status(404).json({
@@ -82,7 +82,7 @@ const updateWareHouse=async (req,res) => {
             })
         }
 
-       await warehouse.update({name},{
+       await warehouse.update({name,isActive},{
             userId:user?.id,
             username:user?.username,
             ipAddress: req.ip || "Unknown",

@@ -13,7 +13,8 @@ module.exports = (sequelize, DataTypes) => {
   }
   Currency.init({
     name: DataTypes.STRING,
-    exchangeRate: DataTypes.FLOAT
+    exchangeRate: DataTypes.FLOAT,
+    isActive:DataTypes.BOOLEAN
   }, {
     sequelize,
     modelName: 'Currency',

@@ -18,6 +18,10 @@ module.exports = {
         type: Sequelize.FLOAT,
         defaultValue:0.0
       },
+      isActive:{
+        type:Sequelize.BOOLEAN,
+        defaultValue:true
+      },
       createdAt: {
         allowNull: false,
         type: Sequelize.DATE

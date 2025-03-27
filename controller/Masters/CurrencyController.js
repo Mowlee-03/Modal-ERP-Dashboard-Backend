@@ -77,7 +77,7 @@ const UpdateCurrency = async (req, res) => {
 
     try {
         const { id } = req.params;
-        const { name, exchangeRate } = req.body;
+        const { name, exchangeRate,isActive } = req.body;
 
         const currency = await Currency.findByPk(id);
         if (!currency) {
@@ -87,7 +87,7 @@ const UpdateCurrency = async (req, res) => {
             });
         }
 
-        await currency.update({ name, exchangeRate });
+        await currency.update({ name, exchangeRate,isActive });
 
         res.status(200).json({
             status: 200,
