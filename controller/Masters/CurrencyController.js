@@ -65,8 +65,86 @@ const GetCurrencies=async (req,res) => {
     }
 }
 
+const UpdateCurrency = async (req, res) => {
+    const user = req.user;
+
+    if (!user?.permissions?.includes("edit")) {
+        return res.status(403).json({
+            status: 403,
+            message: "Forbidden: You don't have permission to edit currency."
+        });
+    }
+
+    try {
+        const { id } = req.params;
+        const { name, exchangeRate } = req.body;
+
+        const currency = await Currency.findByPk(id);
+        if (!currency) {
+            return res.status(404).json({
+                status: 404,
+                message: "Currency not found"
+            });
+        }
+
+        await currency.update({ name, exchangeRate });
+
+        res.status(200).json({
+            status: 200,
+            message: "Currency updated successfully",
+            data: currency
+        });
+    } catch (error) {
+        console.log(error);
+        res.status(500).json({
+            status: 500,
+            message: "An error occurred",
+            error: error.message
+        });
+    }
+};
+
+const DeleteCurrency = async (req, res) => {
+    const user = req.user;
+
+    if (!user?.permissions?.includes("delete")) {
+        return res.status(403).json({
+            status: 403,
+            message: "Forbidden: You don't have permission to delete currency."
+        });
+    }
+
+    try {
+        const { id } = req.params;
+
+        const currency = await Currency.findByPk(id);
+        if (!currency) {
+            return res.status(404).json({
+                status: 404,
+                message: "Currency not found"
+            });
+        }
+
+        await currency.destroy();
+
+        res.status(200).json({
+            status: 200,
+            message: "Currency deleted successfully"
+        });
+    } catch (error) {
+        console.log(error);
+        res.status(500).json({
+            status: 500,
+            message: "An error occurred",
+            error: error.message
+        });
+    }
+};
+
 
 module.exports={
     CreateCurrency,
-    GetCurrencies
+    GetCurrencies,
+    UpdateCurrency,
+    DeleteCurrency
 }

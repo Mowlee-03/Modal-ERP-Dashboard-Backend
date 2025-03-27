@@ -75,7 +75,90 @@ const getPricelist=async (req,res) => {
     }
 }
 
+
+const updatePricelist = async (req, res) => {
+    const user = req.user;
+    if (!user?.permissions?.includes("edit")) {
+        return res.status(403).json({
+            status: 403,
+            message: "Forbidden: You don't have permission to edit a pricelist."
+        });
+    }
+
+    try {
+        const { id } = req.params;
+        const { name, currencyId, description, isActive } = req.body;
+
+        const pricelist = await pricelists.findByPk(id);
+        if (!pricelist) {
+            return res.status(404).json({
+                status: 404,
+                message: "Pricelist not found."
+            });
+        }
+
+        if (currencyId) {
+            const currencyExists = await Currency.findOne({ where: { id: currencyId } });
+            if (!currencyExists) {
+                return res.status(404).json({
+                    status: 404,
+                    message: "Currency does not exist."
+                });
+            }
+        }
+
+        await pricelist.update({ name, currencyId, description, isActive });
+
+        return res.status(200).json({
+            status: 200,
+            message: "Pricelist updated successfully.",
+            data: pricelist
+        });
+    } catch (error) {
+        return res.status(500).json({
+            status: 500,
+            message: "An error occurred.",
+            error: error.message
+        });
+    }
+};
+
+const deletePricelist = async (req, res) => {
+    const user = req.user;
+    if (!user?.permissions?.includes("delete")) {
+        return res.status(403).json({
+            status: 403,
+            message: "Forbidden: You don't have permission to delete a pricelist."
+        });
+    }
+
+    try {
+        const { id } = req.params;
+        const pricelist = await pricelists.findByPk(id);
+        if (!pricelist) {
+            return res.status(404).json({
+                status: 404,
+                message: "Pricelist not found."
+            });
+        }
+
+        await pricelist.destroy();
+        return res.status(200).json({
+            status: 200,
+            message: "Pricelist deleted successfully."
+        });
+    } catch (error) {
+        return res.status(500).json({
+            status: 500,
+            message: "An error occurred.",
+            error: error.message
+        });
+    }
+};
+
 module.exports={
     createPricelist,
-    getPricelist
+    getPricelist,
+    updatePricelist,
+    deletePricelist
 }
