@@ -20,7 +20,7 @@ const createPartner = async (req, res) => {
         gstRegistrationType, gstin, panNo, tanNo, cinNo, supplierCode, msmeRegType, udayamRegNo, msmeRegisteredDate,
         title, contact_name, designation, email, phone, mobile, fax, contact_remarks,
         customerGroupId, salesPerson, collectionPerson, pricelistId, creditPeriod, creditLimit, receivableAccount, paymentTerms, modeOfDispatch, freight,
-        payableAccount, purchaseCreditPeriod, purchasePriceList, purchasePaymentTerms
+        payableAccount, purchaseCreditPeriod, purchasePriceListId, purchasePaymentTerms
     } = req.body;
 
     if (!name) {
@@ -86,7 +86,7 @@ const createPartner = async (req, res) => {
         if (supplier) {
             await SupplierDetails.create({
                 supplierId: partner.id, payableAccount, 
-                purchaseCreditPeriod, purchasePriceList, 
+                purchaseCreditPeriod, purchasePriceListId, 
                 purchasePaymentTerms
             }, { transaction });
         }

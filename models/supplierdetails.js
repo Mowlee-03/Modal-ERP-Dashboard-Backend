@@ -7,13 +7,14 @@ module.exports = (sequelize, DataTypes) => {
    
     static associate(models) {
       SupplierDetails.belongsTo(models.Partner,{foreignKey:"supplierId",as:"supplier",onDelete:"CASCADE",onUpdate:"CASCADE"})
+      SupplierDetails.belongsTo(models.pricelists,{foreignKey:"purchasePriceListId",as:"purchasePriceList",onDelete:"SET NULL",onUpdate:"CASCADE"})
     }
   }
   SupplierDetails.init({
     supplierId: DataTypes.INTEGER,
     payableAccount: DataTypes.STRING,
     purchaseCreditPeriod: DataTypes.INTEGER,
-    purchasePriceList: DataTypes.STRING,
+    purchasePriceListId: DataTypes.INTEGER,
     purchasePaymentTerms: DataTypes.STRING
   }, {
     sequelize,

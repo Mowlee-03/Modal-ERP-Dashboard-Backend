@@ -3,9 +3,10 @@ const {Territory}=require("../../models")
 
 const createTerritory=async (req,res) => {
     const user = req.user;
+console.log(user);
 
     // Check if the user has the 'create' permission
-    if (!user?.permission?.includes("create")) {
+    if (!user?.permissions?.includes("create")) {
         return res.status(403).json({
             status: 403,
             message: "Forbidden: You don't have permission to create a territory."
@@ -74,7 +75,7 @@ const getAllTerritories = async (req, res) => {
 const updateTerritory = async (req, res) => {
     const user = req.user;
 
-    if (!user?.permission?.includes("edit")) {
+    if (!user?.permissions?.includes("edit")) {
         return res.status(403).json({
             status: 403,
             message: "Forbidden: You don't have permission to edit a territory."
@@ -119,7 +120,7 @@ const updateTerritory = async (req, res) => {
 const deleteTerritory = async (req, res) => {
     const user = req.user;
 
-    if (!user?.permission?.includes("delete")) {
+    if (!user?.permissions?.includes("delete")) {
         return res.status(403).json({
             status: 403,
             message: "Forbidden: You don't have permission to delete a territory."

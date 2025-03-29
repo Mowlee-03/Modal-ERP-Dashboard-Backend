@@ -61,7 +61,12 @@ const createPricelist = async (req, res) => {
 
 const getPricelist=async (req,res) => {
     try {
-        const response =await pricelists.findAll()
+        const response =await pricelists.findAll({
+            include:[{
+                model:Currency,
+                as:"currency"
+            }]
+        })
         return res.status(200).json({
             status:200,
             message:"Pricelist Fetching Successful",

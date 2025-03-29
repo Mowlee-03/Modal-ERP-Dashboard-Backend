@@ -27,9 +27,15 @@ module.exports = {
         type: Sequelize.INTEGER,
         allowNull:true
       },
-      purchasePriceList: {
-        type: Sequelize.STRING,
-        allowNull:true
+      purchasePriceListId: {
+        type: Sequelize.INTEGER,
+        allowNull:true,
+        references:{
+          model:"pricelists",
+          key:"id"
+        },
+        onDelete:"SET NULL",
+        onUpdate:"CASCADE"
       },
       purchasePaymentTerms: {
         type: Sequelize.STRING,
