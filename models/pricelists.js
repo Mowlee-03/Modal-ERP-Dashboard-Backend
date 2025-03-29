@@ -9,6 +9,7 @@ module.exports = (sequelize, DataTypes) => {
       pricelists.belongsTo(models.Currency,{foreignKey:"currencyId",as:"currency",onDelete:"CASCADE",onUpdate:"CASCADE"})
       pricelists.hasMany(models.CustomerDetails,{foreignKey:"priceListId",as:"customerDetails",onDelete:"CASCADE",onUpdate:"CASCADE"});
       pricelists.hasMany(models.SupplierDetails,{foreignKey:"purchasePriceListId",as:"supplierDetails",onDelete:"CASCADE",onUpdate:"CASCADE"})
+      pricelists.hasMany(models.CustomerGroup,{foreignKey:"pricelistId",as:"customerGroup",onDelete:"CASCADE",onUpdate:"CASCADE"})
     }
   }
   pricelists.init({

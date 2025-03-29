@@ -12,8 +12,6 @@ const warehouseRoute=require("./Masters/WarehouseRoute")
 const customerRoute=require("./Partners/customerRoute")
 const supplierRoute=require("./Partners/supplierRoute")
 const itemMasterRoute=require("./Item/ItemMasterRoute")
-const salesItemsRoute=require("./Item/SalesItemRoute")
-const purchaseItemRoute=require("./Item/purchaseItemRoute")
 const SalesOrderRoute=require("./SalesOrder/SalesOrderRoute")
 
 
@@ -27,8 +25,6 @@ router.use("/partner",authMiddleware,partnerRoute)
 router.use("/customer",authMiddleware,customerRoute)
 router.use("/supplier",authMiddleware,supplierRoute)
 router.use("/item",authMiddleware,itemMasterRoute)
-router.use("/sales",authMiddleware,salesItemsRoute)
-router.use("/purchase",authMiddleware,purchaseItemRoute)
 router.use("/sales",authMiddleware,SalesOrderRoute)
 
 

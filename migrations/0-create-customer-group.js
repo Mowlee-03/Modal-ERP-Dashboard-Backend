@@ -24,11 +24,18 @@ module.exports = {
           model:"CustomerGroups",
           key:"id"
         },
-        onDelete:"SET NULL"
+        onDelete:"SET NULL",
+        onUpdate:"CASCADE"
       },
-      priceList: {
-        type: Sequelize.STRING,
-        allowNull:true
+      pricelistId: {
+        type: Sequelize.INTEGER,
+        allowNull:true,
+        references:{
+          model:"pricelists",
+          key:"id"
+        },
+        onDelete:"SET NULL",
+        onUpdate:"CASCADE"
       },
       creditLimit: {
         type: Sequelize.DECIMAL,
@@ -49,6 +56,10 @@ module.exports = {
       skipCreditLimitException: {
         type: Sequelize.BOOLEAN,
         defaultValue:false
+      },
+      isActive:{
+        type:Sequelize.BOOLEAN,
+        defaultValue:true
       },
       createdAt: {
         allowNull: false,

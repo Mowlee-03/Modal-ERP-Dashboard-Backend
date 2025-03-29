@@ -42,7 +42,8 @@ module.exports = (sequelize, DataTypes) => {
     incomeAccount: DataTypes.STRING,
     expenseAccount: DataTypes.STRING,
     hsnSacCode: DataTypes.STRING,
-    description: DataTypes.TEXT
+    description: DataTypes.TEXT,
+    isActive:DataTypes.BOOLEAN
   }, {
     sequelize,
     modelName: 'ItemGroup',
