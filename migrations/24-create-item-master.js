@@ -55,7 +55,7 @@ module.exports = {
         allowNull:true
       },
       warranty: {
-        type: Sequelize.INTEGER,
+        type: Sequelize.STRING,
         allowNull:true
       },
       componentLocation: {

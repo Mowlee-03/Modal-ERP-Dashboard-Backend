@@ -29,7 +29,7 @@ module.exports = (sequelize, DataTypes) => {
     baseUOM: DataTypes.STRING,
     barCode: DataTypes.STRING,
     partCode: DataTypes.STRING,
-    warranty: DataTypes.INTEGER,
+    warranty: DataTypes.STRING,
     componentLocation: DataTypes.STRING,
   }, {
     sequelize,

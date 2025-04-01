@@ -38,6 +38,25 @@ module.exports = (sequelize, DataTypes) => {
   }, {
     sequelize,
     modelName: 'SalesOrder',
+    hooks: {
+      beforeCreate: async (order) => {
+        const latestOrder = await SalesOrder.findOne({
+          order: [["soId", "DESC"]],
+        });
+
+        let newId = "SO/1"; // Default ID if no records exist
+
+        if (latestOrder && latestOrder.soId) {
+          const lastNumber = parseInt(latestOrder.soId.split("/")[1], 10);
+          const nextNumber = lastNumber + 1;
+
+          newId = `SO/${nextNumber}`;
+        }
+
+        order.soId = newId; // Assign the new ID
+      },
+    },
+  
   });
   return SalesOrder;
 };

@@ -11,7 +11,7 @@ module.exports = (sequelize, DataTypes) => {
   }
   ItemServiceDetails.init({
     itemId:DataTypes.INTEGER,
-    serviceableEquipment: DataTypes.BOOLEAN,
+    serviceableEquipment: DataTypes.STRING,
     enableSpareWarranty: DataTypes.BOOLEAN,
     warrantyDuration: DataTypes.INTEGER,
     installationApplicable: DataTypes.BOOLEAN,

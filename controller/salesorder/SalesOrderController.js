@@ -24,10 +24,9 @@ const CREATE_SALES_ORDER=async (req,res) => {
         return res.status(400).json({ status: 400, message: "At least one item is required." });
     }
 
-    try {
-        // Start transaction
-        const transaction = await sequelize.transaction();
+    const transaction = await sequelize.transaction();
 
+    try {
         // Step 1: Create Sales Order
         const salesOrder = await SalesOrder.create({
             orderDate, quoteId, customerId, customerPoNumber, customerPoDate, salesPerson, territoryId, remarks, 
@@ -75,6 +74,10 @@ const CREATE_SALES_ORDER=async (req,res) => {
             salesOrder
         });
     } catch (error) {
+console.log(error);
+
+        await transaction.rollback();
+
         return res.status(500).json({
             status:500,
             message:"An error accured",

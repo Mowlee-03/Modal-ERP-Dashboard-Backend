@@ -15,6 +15,7 @@ const CREATE_ITEM = async (req, res) => {
             message: "Forbidden: You don't have permission to create an item."
         });
     }
+console.log(req.body);
 
     const {
         name, description, itemType, categoryId, groupId, baseUOM, barCode, partCode, warranty, componentLocation,
@@ -120,6 +121,8 @@ const CREATE_ITEM = async (req, res) => {
         });
     } catch (error) {
         await transaction.rollback();
+        
+        
         return res.status(500).json({
             status: 500,
             message: "An error occurred.",
@@ -128,6 +131,24 @@ const CREATE_ITEM = async (req, res) => {
     }
 };
 
+const GET_ALL_ITEMS=async (req,res) => {
+    try {
+        const response=await ItemMaster.findAll({
+            attributes:['id','name']
+        })
+        return res.status(200).json({
+            status:200,
+            message:"Fetching All Items Successfully",
+            data:response
+        })
+    } catch (error) {
+        return res.status(500).json({
+            status:500,
+            message:"An error accured",
+            error:error.message
+        })
+    }
+}
 
 const PurchaseItems=async (req,res) => {
     try {
@@ -176,4 +197,4 @@ const SalesItems=async (req,res) => {
     }
 }
 
-module.exports = { CREATE_ITEM,PurchaseItems ,SalesItems};
+module.exports = { CREATE_ITEM,PurchaseItems ,SalesItems,GET_ALL_ITEMS};

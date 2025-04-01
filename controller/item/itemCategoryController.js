@@ -30,6 +30,8 @@ const CreateItemCategory=async (req,res) => {
         const existCategory=await ItemCategory.findOne({
             where:{name:name}
         })
+        console.log(existCategory);
+        
         if (existCategory) {
             return res.status(409).json({
                 status:409,
@@ -38,6 +40,10 @@ const CreateItemCategory=async (req,res) => {
         }
 
         await ItemCategory.create({name})
+        return res.status(200).json({
+            status:200,
+            message:"Item category created successfully"
+        })
 
     } catch (error) {
         return res.status(500).json({

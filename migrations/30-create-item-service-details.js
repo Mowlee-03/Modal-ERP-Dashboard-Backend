@@ -20,24 +20,24 @@ module.exports = {
         onDelete: 'CASCADE'
       },
       serviceableEquipment: {
-        type: Sequelize.BOOLEAN,
-        defaultValue:false
+        type: Sequelize.STRING,
+        allowNull:false
       },
       enableSpareWarranty: {
-        type: Sequelize.BOOLEAN,
-        defaultValue:false
+        type: Sequelize.STRING,
+        allowNull:true
       },
       warrantyDuration: {
         type: Sequelize.INTEGER,
         allowNull:true
       },
       installationApplicable: {
-        type: Sequelize.BOOLEAN,
-        defaultValue:false
+        type: Sequelize.STRING,
+        allowNull:true
       },
       warrantyApplicable: {
-        type: Sequelize.BOOLEAN,
-        defaultValue:false
+        type: Sequelize.STRING,
+        allowNull:true
       },
       defaultWarrantyContract: {
         type: Sequelize.STRING,
