@@ -115,7 +115,7 @@ const deleteWarehouse=async (req,res) => {
         const {warehouseId}=req.params
 
 
-        const warehouse=await Warehouses.findOne(warehouseId)
+        const warehouse=await Warehouses.findByPk(warehouseId)
         if (!warehouse) {
             return res.status(404).json({
                 status:404,
