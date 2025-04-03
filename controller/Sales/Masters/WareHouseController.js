@@ -1,4 +1,4 @@
-const {Warehouses}=require("../../models")
+const {Warehouses}=require("../../../models")
 
 
 const createWareHouse=async (req,res) => {

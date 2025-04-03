@@ -1,4 +1,4 @@
-const {Territory}=require("../../models")
+const {Territory}=require("../../../models")
 
 
 const createTerritory=async (req,res) => {

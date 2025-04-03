@@ -1,4 +1,4 @@
-const {pricelists,Currency}=require("../../models")
+const {pricelists,Currency}=require("../../../models")
 
 
 const createPricelist = async (req, res) => {

@@ -2,7 +2,7 @@ const {
     Partner,CustomerDetails,
     Contact,PartnerGeneralDetails,
     PartnerLegalDetails,CustomerGroup,pricelists
-}=require("../../models")
+}=require("../../../models")
 
 const createCustomerGroup=async (req,res) => {
     try {

@@ -1,7 +1,7 @@
 var express=require("express")
-const { CreateCurrency,GetCurrencies, UpdateCurrency, DeleteCurrency } = require("../../controller/Masters/CurrencyController")
+const { CreateCurrency,GetCurrencies, UpdateCurrency, DeleteCurrency } = require("../../../controller/Sales/Masters/CurrencyController")
 var router=express.Router()
-const authMiddleware = require("../../middleware/authMiddleware")
+const authMiddleware = require("../../../middleware/authMiddleware")
 
 router.post("/create_currency",authMiddleware,CreateCurrency)
 router.get("/get_currencies",authMiddleware,GetCurrencies)

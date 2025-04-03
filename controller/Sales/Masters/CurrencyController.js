@@ -1,4 +1,4 @@
-const {Currency}=require("../../models")
+const {Currency}=require("../../../models")
 
 
 const CreateCurrency=async (req,res) => {

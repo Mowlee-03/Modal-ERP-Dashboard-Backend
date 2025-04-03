@@ -1,7 +1,7 @@
 const express=require("express")
-const { createWareHouse, updateWareHouse, deleteWarehouse, getAllWarehouse } = require("../../controller/Masters/WareHouseController")
+const { createWareHouse, updateWareHouse, deleteWarehouse, getAllWarehouse } = require("../../../controller/Sales/Masters/WareHouseController")
 const router=express.Router()
-const authMiddleware = require("../../middleware/authMiddleware")
+const authMiddleware = require("../../../middleware/authMiddleware")
 
 
 router.post("/create_warehouse",authMiddleware,createWareHouse)

@@ -4,9 +4,9 @@ const {
     getPricelist, 
     updatePricelist, 
     deletePricelist 
-} = require("../../controller/Masters/PriceListsController")
+} = require("../../../controller/Sales/Masters/PriceListsController")
 const router=express.Router()
-const authMiddleware = require("../../middleware/authMiddleware")
+const authMiddleware = require("../../../middleware/authMiddleware")
 
 router.post("/create_pricelist",authMiddleware,createPricelist)
 router.get("/getpricelist",authMiddleware,getPricelist)
