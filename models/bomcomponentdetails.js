@@ -4,13 +4,9 @@ const {
 } = require('sequelize');
 module.exports = (sequelize, DataTypes) => {
   class BomComponentDetails extends Model {
-    /**
-     * Helper method for defining associations.
-     * This method is not a part of Sequelize lifecycle.
-     * The `models/index` file will call this method automatically.
-     */
     static associate(models) {
-      
+      BomComponentDetails.belongsTo(models.BillOfMaterials,{foreignKey:"BomId",as:"Bom",onDelete:"CASCADE",onUpdate:"CASCADE"});
+      BomComponentDetails.belongsTo(models.ItemMaster,{foreignKey:"itemId",as:"component",onDelete:"CASCADE",onUpdate:"CASCADE"});
     }
   }
   BomComponentDetails.init({

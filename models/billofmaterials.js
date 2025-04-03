@@ -6,7 +6,8 @@ module.exports = (sequelize, DataTypes) => {
   class BillOfMaterials extends Model {
 
     static associate(models) {
-      
+      BillOfMaterials.belongsTo(models.ItemMaster,{foreignKey:"itemId",as:"item",onDelete:"CASCADE",onUpdate:"CASCADE"});
+      BillOfMaterials.hasMany(models.BomComponentDetails,{foreignKey:"BomId",as:"componentsDetails",onDelete:"CASCADE",onUpdate:"CASCADE"});
     }
   }
   BillOfMaterials.init({
