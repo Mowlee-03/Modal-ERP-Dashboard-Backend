@@ -74,7 +74,7 @@ const CREATE_SALES_ORDER=async (req,res) => {
             salesOrder
         });
     } catch (error) {
-console.log(error);
+        console.log(error);
 
         await transaction.rollback();
 

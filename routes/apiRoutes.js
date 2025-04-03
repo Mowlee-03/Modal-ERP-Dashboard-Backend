@@ -4,23 +4,22 @@ const authMiddleware = require("../middleware/authMiddleware")
 
 
 
-const partnerRoute=require("./Partners/partnerRoute")
-const currencyRoute=require("./Sales/Masters/CurrencyRoute")
-const pricelistRoute=require("./Sales/Masters/PricelistRoute")
-const territoriesRoute=require("./Sales/Masters/TerritoryRoute")
-const warehouseRoute=require("./Sales/Masters/WarehouseRoute")
-const customerRoute=require("./Sales/Masters/customerRoute")
-const supplierRoute=require("./Partners/supplierRoute")
-const itemMasterRoute=require("./Item/ItemMasterRoute")
-const SalesOrderRoute=require("./Sales/SalesOrderRoute")
 
 
 
 
 //SALES
+const SalesOrderRoute=require("./Sales/SalesOrderRoute")
+
 router.use("/sales",authMiddleware,SalesOrderRoute)
 
 // SALE MASTERS
+const currencyRoute=require("./Sales/Masters/CurrencyRoute")
+const pricelistRoute=require("./Sales/Masters/PricelistRoute")
+const territoriesRoute=require("./Sales/Masters/TerritoryRoute")
+const warehouseRoute=require("./Sales/Masters/WarehouseRoute")
+const customerRoute=require("./Sales/Masters/customerRoute")
+
 router.use("/currency",authMiddleware,currencyRoute)
 router.use("/pricelists",authMiddleware,pricelistRoute)
 router.use("/territory",authMiddleware,territoriesRoute)
@@ -28,9 +27,22 @@ router.use("/warehouse",authMiddleware,warehouseRoute)
 router.use("/customer",authMiddleware,customerRoute)
 
 
+//PRODUCTION
+
+
+//PRODUCTION MASTERS 
+const productionProcessRoute=require("./Production/Masters/Prod_ProcessRoute")
+const workcenterRoute=require("./Production/Masters/WorkCenterRoute")
+const RoutingsRoute=require("./Production/Masters/RoutingsRoute")
+router.use("/processes",authMiddleware,productionProcessRoute)
+router.use("/workcenter",authMiddleware,workcenterRoute)
+router.use("/routings",authMiddleware,RoutingsRoute)
 
 
 
+const partnerRoute=require("./Partners/partnerRoute")
+const supplierRoute=require("./Partners/supplierRoute")
+const itemMasterRoute=require("./Item/ItemMasterRoute")
 
 router.use("/partner",authMiddleware,partnerRoute)
 
