@@ -31,13 +31,14 @@ router.use("/customer",authMiddleware,customerRoute)
 
 
 //PRODUCTION MASTERS 
+const BillofMaterialsRoute=require("./Production/Masters/BillofMaterialsRoute")
 const productionProcessRoute=require("./Production/Masters/Prod_ProcessRoute")
 const workcenterRoute=require("./Production/Masters/WorkCenterRoute")
 const RoutingsRoute=require("./Production/Masters/RoutingsRoute")
 router.use("/processes",authMiddleware,productionProcessRoute)
 router.use("/workcenter",authMiddleware,workcenterRoute)
 router.use("/routings",authMiddleware,RoutingsRoute)
-
+router.use("/bom",authMiddleware,BillofMaterialsRoute)
 
 
 const partnerRoute=require("./Partners/partnerRoute")

@@ -1,6 +1,7 @@
 const {
     BillOfMaterials,
     BomComponentDetails,
+    ItemMaster,
     sequelize
 }=require("../../../models")
 
@@ -60,7 +61,115 @@ const CreateBillofMaterials=async (req,res) => {
 }
 
 
+const GetBillOfMaterials = async (req, res) => {
+    try {
+        const { id } = req.params;
+
+        if (id) {
+            const bom = await BillOfMaterials.findOne({
+                where: { id },
+                include: [{
+                    model:BomComponentDetails,
+                    as:"componentsDetails",
+                    include:[{
+                        model:ItemMaster,
+                        as:"component"
+                    }]
+                }]
+            });
+
+            if (!bom) {
+                return res.status(404).json({ status: 404, message: "BOM not found" });
+            }
+
+            return res.status(200).json({ status: 200, data: bom });
+        }
+
+        const allBoms = await BillOfMaterials.findAll({
+            include: [{model:BomComponentDetails,as:"componentsDetails"}]
+        });
+
+        return res.status(200).json({ status: 200, data: allBoms });
+
+    } catch (error) {
+        return res.status(500).json({ status: 500, message: "An internal server error", error: error.message });
+    }
+};
+
+const UpdateBillOfMaterials = async (req, res) => {
+    const { id } = req.params;
+    const { BomName, itemId, remarks, isDefault, componentsDetails } = req.body;
+
+    const transaction = await sequelize.transaction();
+
+    try {
+        const bom = await BillOfMaterials.findByPk(id);
+
+        if (!bom) {
+            await transaction.rollback();
+            return res.status(404).json({ status: 404, message: "BOM not found" });
+        }
+
+        await bom.update({ BomName, itemId, remarks, isDefault }, { transaction });
+
+        if (Array.isArray(componentsDetails)) {
+            // First delete old components
+            await BomComponentDetails.destroy({ where: { BomId: id }, transaction });
+
+            // Then add updated ones
+            const newComponents = componentsDetails.map(component => ({
+                BomId: id,
+                itemId: component.itemId,
+                description: component.description,
+                quantity: component.quantity,
+                uom: component.uom,
+                locationRemarks: component.locationRemarks
+            }));
+
+            await BomComponentDetails.bulkCreate(newComponents, { transaction });
+        }
+
+        await transaction.commit();
+
+        return res.status(200).json({ status: 200, message: "BOM updated successfully" });
+
+    } catch (error) {
+        await transaction.rollback();
+        return res.status(500).json({ status: 500, message: "An internal server error", error: error.message });
+    }
+};
+
+
+const DeleteBillOfMaterials = async (req, res) => {
+    const { id } = req.params;
+
+    const transaction = await sequelize.transaction();
+
+    try {
+        const bom = await BillOfMaterials.findByPk(id);
+
+        if (!bom) {
+            await transaction.rollback();
+            return res.status(404).json({ status: 404, message: "BOM not found" });
+        }
+
+        await BomComponentDetails.destroy({ where: { BomId: id }, transaction });
+        await bom.destroy({ transaction });
+
+        await transaction.commit();
+
+        return res.status(200).json({ status: 200, message: "BOM deleted successfully" });
+
+    } catch (error) {
+        await transaction.rollback();
+        return res.status(500).json({ status: 500, message: "An internal server error", error: error.message });
+    }
+};
+
+
 module.exports={
     CreateBillofMaterials,
-
+    GetBillOfMaterials,
+    UpdateBillOfMaterials,
+    DeleteBillOfMaterials
 }
