@@ -8,8 +8,9 @@ module.exports = (sequelize, DataTypes) => {
       SalesOrder.hasOne(models.SoBillingDetails,{foreignKey:"salesOrderId",as:"billingDetail",onDelete:"CASCADE",onUpdate:"CASCADE"});
       SalesOrder.hasOne(models.SoDeliveryDetails,{foreignKey:"salesOrderId",as:"deleiveryDetail",onDelete:"CASCADE",onUpdate:"CASCADE"});
       SalesOrder.hasMany(models.SalesOrderItem,{foreignKey:"salesOrderId",as:"items",onDelete:"CASCADE",onUpdate:"CASCADE"});
-      SalesOrder.belongsTo(models.Partner,{foreignKey:"customerId",as:"customer",onDelete:"CASCADE",onUpdate:"CASCADE"})
-      SalesOrder.belongsTo(models.Territory,{foreignKey:"territoryId",as:"territory",onDelete:"SET NULL",onUpdate:"CASCADE"})
+      SalesOrder.belongsTo(models.Partner,{foreignKey:"customerId",as:"customer",onDelete:"CASCADE",onUpdate:"CASCADE"});
+      SalesOrder.belongsTo(models.Territory,{foreignKey:"territoryId",as:"territory",onDelete:"SET NULL",onUpdate:"CASCADE"});
+      SalesOrder.hasMany(models.ProductionOrder,{foreignKey:"salesOrderId",as:"productionOrder",onDelete:"CASCADE",onUpdate:"CASCADE"});
     }
   }
   SalesOrder.init({

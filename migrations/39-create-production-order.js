@@ -49,7 +49,6 @@ module.exports = {
           model:"Warehouses",
           key:"id"
         },
-        onDelete:"CASCADE",
         onUpdate:"CASCADE"
       },
       FGwarehouseId: {
@@ -59,7 +58,6 @@ module.exports = {
           model:"Warehouses",
           key:"id"
         },
-        onDelete:"CASCADE",
         onUpdate:"CASCADE"
       },
       routingId:{

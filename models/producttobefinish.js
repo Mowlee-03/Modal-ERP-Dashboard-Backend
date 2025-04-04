@@ -6,7 +6,9 @@ module.exports = (sequelize, DataTypes) => {
   class ProductTobeFinish extends Model {
     
     static associate(models) {
-      // define association here
+      ProductTobeFinish.belongsTo(models.ProductionOrder,{foreignKey:"PrdOrdId",as:"productionOrder",onDelete:"CASCADE",onUpdate:"CASCADE"});
+      ProductTobeFinish.belongsTo(models.ItemMaster,{foreignKey:'itemId',as:"item",onDelete:"CASCADE",onUpdate:"CASCADE"});
+      ProductTobeFinish.belongsTo(models.BillOfMaterials,{foreignKey:"BomId",as:"BillofMaterials",onDelete:'SET NULL',onUpdate:"CASCADE"});
     }
   }
   ProductTobeFinish.init({

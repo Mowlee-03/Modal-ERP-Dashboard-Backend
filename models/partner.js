@@ -13,6 +13,8 @@ module.exports = (sequelize, DataTypes) => {
       Partner.hasOne(models.CustomerDetails,{foreignKey:"customerId",as:"customerDetails",onDelete:"CASCADE",onUpdate:"CASCADE"});
       Partner.hasOne(models.SupplierDetails,{foreignKey:"supplierId",as:"supplierDetails",onDelete:"CASCADE",onUpdate:"CASCADE"});
       Partner.hasMany(models.PurchaseItemDetails,{foreignKey:"supplierId",as:"purchaseItems",onDelete:"CASCADE",onUpdate:"CASCADE"});
+      Partner.hasMany(models.ProductionOrder,{foreignKey:'customerId',as:"productionOrder",onDelete:"CASCADE",onUpdate:"CASCADE"});
+      
     }
   }
   Partner.init({
