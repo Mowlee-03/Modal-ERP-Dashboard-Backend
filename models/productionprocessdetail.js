@@ -5,7 +5,9 @@ const {
 module.exports = (sequelize, DataTypes) => {
   class ProductionProcessDetail extends Model {
     static associate(models) {
-      
+      ProductionProcessDetail.belongsTo(models.ProductionOrder,{foreignKey:"PrdOrdId",as:"productionOrder",onDelete:"CASCADE",onUpdate:"CASCADE"});
+      ProductionProcessDetail.belongsTo(models.ProductionProcesses,{foreignKey:"processId",as:"process",onDelete:"CASCADE",onUpdate:"CASCADE"});
+      ProductionProcessDetail.belongsTo(models.WorkCenters,{foreignKey:"workcenterId",as:"workcenter",onDelete:"CASCADE",onUpdate:'CASCADE'});
     }
   }
   ProductionProcessDetail.init({

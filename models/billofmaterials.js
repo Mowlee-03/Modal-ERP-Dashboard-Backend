@@ -8,6 +8,7 @@ module.exports = (sequelize, DataTypes) => {
     static associate(models) {
       BillOfMaterials.belongsTo(models.ItemMaster,{foreignKey:"itemId",as:"item",onDelete:"CASCADE",onUpdate:"CASCADE"});
       BillOfMaterials.hasMany(models.BomComponentDetails,{foreignKey:"BomId",as:"componentsDetails",onDelete:"CASCADE",onUpdate:"CASCADE"});
+      BillOfMaterials.hasMany(models.ProductTobeFinish,{foreignKey:'BomId',as:"productsTobeFinishing",onUpdate:"CASCADE",onDelete:"CASCADE"});
     }
   }
   BillOfMaterials.init({

@@ -12,6 +12,9 @@ module.exports = (sequelize, DataTypes) => {
       ProductionOrder.belongsTo(models.Warehouses,{foreignKey:"FGwarehouseId",as:"FGwarehouse",onUpdate:"CASCADE"});
       ProductionOrder.belongsTo(models.Routings,{foreignKey:"routingId",as:"routing",onDelete:"SET NULL",onUpdate:"CASCADE"});
       ProductionOrder.hasMany(models.ProductTobeFinish,{foreignKey:"PrdOrdId",as:"productsTobeFinishing",onDelete:"CASCADE",onUpdate:"CASCADE"});
+      ProductionOrder.hasMany(models.ProdRawMatDetail,{foreignKey:"PrdOrdId",as:"rawMaterialsDetails",onDelete:"CASCADE",onUpdate:"CASCADE"});
+      ProductionOrder.hasMany(models.ProductionProcessDetail,{foreignKey:"PrdOrdId",as:"productionProcessDetails",onDelete:"CASCADE",onUpdate:"CASCADE"});
+
     }
   }
   ProductionOrder.init({

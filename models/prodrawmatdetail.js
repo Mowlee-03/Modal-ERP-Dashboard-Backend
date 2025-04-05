@@ -4,13 +4,10 @@ const {
 } = require('sequelize');
 module.exports = (sequelize, DataTypes) => {
   class ProdRawMatDetail extends Model {
-    /**
-     * Helper method for defining associations.
-     * This method is not a part of Sequelize lifecycle.
-     * The `models/index` file will call this method automatically.
-     */
+
     static associate(models) {
-      // define association here
+      ProdRawMatDetail.belongsTo(models.ProductionOrder,{foreignKey:"PrdOrdId",as:"productionOrder",onDelete:"CASCADE",onUpdate:"CASCADE"});
+      ProdRawMatDetail.belongsTo(models.ItemMaster,{foreignKey:"itemId",as:"rawmaterial",onDelete:"CASCADE",onUpdate:"CASCADE"});
     }
   }
   ProdRawMatDetail.init({
