@@ -8,6 +8,6 @@ var router=express.Router()
 router.post("/create",authMiddleware,checkPermission("create"),CreateProcess)
 router.get("/viewall",authMiddleware,GetProcess)
 router.put("/update/:id",authMiddleware,checkPermission("edit"),UpdateProcess)
-router.delete("/create/:id",authMiddleware,checkPermission("delete"),DeleteProcess)
+router.delete("/delete/:id",authMiddleware,checkPermission("delete"),DeleteProcess)
 
 module.exports=router

@@ -8,8 +8,8 @@ var router=express.Router()
 
 router.post("/create",authMiddleware,checkPermission("create"),CreateBillofMaterials)
 router.get("/view/:id",authMiddleware,GetBillOfMaterials)
-router.post("/update/:id",authMiddleware,checkPermission("edit"),UpdateBillOfMaterials)
-router.post("/delete/:id",authMiddleware,checkPermission("delete"),DeleteBillOfMaterials)
+router.put("/update/:id",authMiddleware,checkPermission("edit"),UpdateBillOfMaterials)
+router.delete("/delete/:id",authMiddleware,checkPermission("delete"),DeleteBillOfMaterials)
 
 
 module.exports=router

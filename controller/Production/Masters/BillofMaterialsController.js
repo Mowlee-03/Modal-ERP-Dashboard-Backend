@@ -52,6 +52,7 @@ const CreateBillofMaterials=async (req,res) => {
         });
         
     } catch (error) {
+        await transaction.rollback();
         return res.status(500).json({
             status:500,
             message:"An internal server error",

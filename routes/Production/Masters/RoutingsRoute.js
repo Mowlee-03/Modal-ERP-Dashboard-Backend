@@ -12,8 +12,8 @@ var router=express.Router()
 router.post("/create",authMiddleware,checkPermission("create"),CreateRouting)
 router.get("/viewall",authMiddleware,GetAllRoutings)
 router.get("/view/:id",authMiddleware,GetRoutingById)
-router.put("/update",authMiddleware,checkPermission("edit"),UpdateRouting)
-router.delete("/delete",authMiddleware,checkPermission("delete"),DeleteRouting)
+router.put("/update/:id",authMiddleware,checkPermission("edit"),UpdateRouting)
+router.delete("/delete/:id",authMiddleware,checkPermission("delete"),DeleteRouting)
 
 
 

@@ -28,7 +28,8 @@ router.use("/customer",authMiddleware,customerRoute)
 
 
 //PRODUCTION
-
+const ProductionOrderRoute=require("./Production/ProductionOrderRoutes")
+router.use("/production_order",authMiddleware,ProductionOrderRoute)
 
 //PRODUCTION MASTERS 
 const BillofMaterialsRoute=require("./Production/Masters/BillofMaterialsRoute")
@@ -39,6 +40,8 @@ router.use("/processes",authMiddleware,productionProcessRoute)
 router.use("/workcenter",authMiddleware,workcenterRoute)
 router.use("/routings",authMiddleware,RoutingsRoute)
 router.use("/bom",authMiddleware,BillofMaterialsRoute)
+
+
 
 
 const partnerRoute=require("./Partners/partnerRoute")

@@ -36,6 +36,25 @@ module.exports = (sequelize, DataTypes) => {
   }, {
     sequelize,
     modelName: 'ProductionOrder',
+
+    hooks: {
+      beforeCreate: async (order) => {
+        const latestOrder = await ProductionOrder.findOne({
+          order: [["PrdOrdNo", "DESC"]],
+        });
+
+        let newId = "PROD/ORD/1"; // Default ID if no records exist
+
+        if (latestOrder && latestOrder.soId) {
+          const lastNumber = parseInt(latestOrder.PrdOrdNo.split("/")[1], 10);
+          const nextNumber = lastNumber + 1;
+
+          newId = `PROD/ORD/${nextNumber}`;
+        }
+
+        order.PrdOrdNo= newId; // Assign the new ID
+      },
+    },
   });
   return ProductionOrder;
 };
